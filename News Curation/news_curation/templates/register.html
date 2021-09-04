@@ -1,0 +1,112 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="content-section">
+		<form action="" method="POST">
+			{{ form.hidden_tag() }}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Join Today</legend>
+				<div class="form-group">
+					{{ form.first_name.label(class="form-control-label") }}
+					<!-- displaying error for invalid input -->
+					{% if form.first_name.errors %}
+						{{ form.first_name(class="form-control is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.first_name.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.first_name(class="form-control form-control") }}
+					{% endif %}
+					<!-- displaying error for invalid input -->
+					
+				</div>
+				<div class="form-group">
+					{{ form.last_name.label(class="form-control-label") }}
+					<!-- displaying error for invalid input -->
+					{% if form.last_name.errors %}
+						{{ form.last_name(class="form-control is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.last_name.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.last_name(class="form-control form-control") }}
+					{% endif %}
+					<!-- displaying error for invalid input -->
+					
+				</div>
+				<div class="form-group">
+					{{ form.username.label(class="form-control-label") }}
+					<!-- displaying error for invalid input -->
+					{% if form.username.errors %}
+						{{ form.username(class="form-control is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.username.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.username(class="form-control form-control") }}
+					{% endif %}
+					<!-- displaying error for invalid input -->
+					
+				</div>
+				<div class="form-group">
+					{{ form.email.label(class="form-control-label") }}
+					<!-- displaying error for invalid input -->
+					{% if form.email.errors %}
+						{{ form.email(class="form-control is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.email.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.email(class="form-control form-control") }}
+					{% endif %}
+					<!-- displaying error for invalid input -->
+				</div>
+				<div class="form-group">
+					{{ form.password.label(class="form-control-label") }}
+					<!-- displaying error for invalid input -->
+					{% if form.password.errors %}
+						{{ form.password(class="form-control is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.password.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.password(class="form-control form-control") }}
+					{% endif %}
+					<!-- displaying error for invalid input -->
+				</div>
+				<div class="form-group">
+					{{ form.confirm_password.label(class="form-control-label") }}
+					<!-- displaying error for invalid input -->
+					{% if form.confirm_password.errors %}
+						{{ form.confirm_password(class="form-control is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.confirm_password.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.confirm_password(class="form-control form-control") }}
+					{% endif %}
+					<!-- displaying error for invalid input -->
+				</div>
+			</fieldset>
+			<div class="form-group">
+				{{ form.submit(class="btn btn-outline-info") }}
+			</div>
+		</form>
+	</div>
+	<div class="border-top pt-3">
+		<small>
+			Already Have An Account? <a href="{{ url_for('login') }}" class="ms-2">Sign In</a>
+		</small>
+	</div>
+{% endblock content %}
