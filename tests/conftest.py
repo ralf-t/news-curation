@@ -1,6 +1,4 @@
 '''
-REFS
-
 db
 https://flask.palletsprojects.com/en/2.0.x/tutorial/database/
 
@@ -21,19 +19,45 @@ https://codeinthehole.com/tips/prefer-webtest-to-djangos-test-client-for-functio
 https://docs.pylonsproject.org/projects/webtest/en/latest/
 '''
 import pytest
+import logging
+
+from news_curation import create_app
+from webtest import TestApp
+from news_curation.database import db as _db
 
 @pytest.fixture
 def app():
-	pass
+	"""Create application for the tests"""
+	_app = create_app({'TESTING': True})
+	_app.logger.setLevel(logging.CRITICAL)
+	ctx = _app.test_request_context()
+	ctx.push()
+
+	yield _app
+
+	ctx.pop()
 
 @pytest.fixture
 def testapp(app):
-	pass
+	"""Create Webtest app"""
+	return TestApp(app)
 
 @pytest.fixture
 def db(app):
-	pass
+	"""Create database for the tests"""
+	_db.app = app
+	with app.app_context():
+		_db.create_all()
 
+	yield _db
+
+	# Explicitly close DB connection
+	_db.session.close()
+	_db.drop_all()
+
+
+# TODO
 @pytest.fixture
 def user(db):
+	"""Create user for tests"""
 	pass
