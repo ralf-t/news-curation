@@ -11,6 +11,10 @@ flask-migrate = "*"
 python-dotenv = "*"
 pytest = "*"
 webtest = "*"
+faker = "*"
+flask-login = "*"
+flask-bcrypt = "*"
+bcrypt = "*"
 
 [dev-packages]
 
