@@ -5,11 +5,11 @@ REQUISITES =====================================================================
 
 
 SETUP (@ CMD) ====================================================================
-1. Activate virtual environment using:
+1. Rename the file `.env.example` to `.env` and set environment variables, see .env.example file
+2. Activate virtual environment using:
 	pipenv shell
-2. Install project dependencies using:
+3. Install project dependencies using:
 	pipenv install
-3. Rename the file `.env.example` to `.env` and set environment variables, see .env.example file
 4. Run the app (must be inside virtual env) using:
 	flask run
 * Alternatively, run app in development using:
