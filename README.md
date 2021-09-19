@@ -10,9 +10,9 @@
 5. Run the app (must be inside virtual env) using:
 	`flask run`
 * Alternatively, run app in development using:
-	`flask go dev`
+	`flask up dev`
 * Run app in production using:
-	`flask go prod`
+	`flask up prod`
 
 
 
