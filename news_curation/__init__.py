@@ -50,6 +50,6 @@ def register_blueprints(app):
 	return None
 
 def register_commands(app):
-	app.cli.add_command(commands.go)
+	app.cli.add_command(commands.up)
 	app.cli.add_command(commands.seeder_cli)
 	return None
