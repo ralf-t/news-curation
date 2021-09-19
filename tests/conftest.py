@@ -22,10 +22,11 @@ import pytest
 import logging
 
 from news_curation import create_app
-from webtest import TestApp
 from news_curation.database import db as _db
+from news_curation.extensions import bcrypt
 
 from .factories import UserFactory
+from webtest import TestApp
 
 @pytest.fixture
 def app():
@@ -62,6 +63,7 @@ def db(app):
 @pytest.fixture
 def user(db):
 	"""Create user for tests"""
-	user = UserFactory(password="osmanthus!wine")
+	psw = bcrypt.generate_password_hash("osmanthus!wine")
+	user = UserFactory(password=psw)
 	db.session.commit()
 	return user

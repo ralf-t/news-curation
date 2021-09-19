@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
 	<div class="content-section">
-		<form action="" method="POST">
+		<!-- ST: added id to form for testing -->
+		<form id="loginForm" action="" method="POST">
 			{{ form.hidden_tag() }} 	<!-- IMPORTANT FOR SECURITY -->
 			<fieldset class="form-group">
 				<legend class="border-bottom mb-4">Log In</legend>

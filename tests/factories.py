@@ -1,6 +1,7 @@
 """Factories to help in tests"""
 from news_curation.database import db
 from news_curation.user.models import User
+from news_curation.extensions import bcrypt
 
 from factory import Sequence, PostGenerationMethodCall
 from factory.alchemy import SQLAlchemyModelFactory
@@ -23,8 +24,6 @@ class UserFactory(BaseFactory):
 	last_name= Sequence(lambda n: f"{n}")
 	username= Sequence(lambda n: f"user{n}")
 	email= Sequence(lambda n: f"user{n}@example.com")
-	# TODO: set_password
-	# password = PostGenerationMethodCall("set_password", "example")
 
 	class Meta:
 		"""Factory configuration"""
