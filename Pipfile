@@ -16,6 +16,7 @@ flask-login = "*"
 flask-bcrypt = "*"
 bcrypt = "*"
 factory-boy = "*"
+flask-wtf = "*"
 
 [dev-packages]
 

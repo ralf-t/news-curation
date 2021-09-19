@@ -17,6 +17,8 @@ from news_curation.extensions import (
 	bcrypt
 	)
 
+FLASK_ENV = environ['FLASK_ENV']
+
 def create_app(test_config=None):
 	"""App Factory"""
 	app = Flask(__name__)
@@ -28,7 +30,7 @@ def create_app(test_config=None):
 	# use env defaults
 	elif environ['FLASK_ENV'] == 'development':
 		app.config.from_object(settings.DevelopmentConfig)
-	elif environ['FLASK_ENV'] == 'production':
+	elif FLASK_ENV == 'production' or FLASK_ENV == 'seeder':
 		app.config.from_object(settings.ProductionConfig)
 
 	register_extensions(app)

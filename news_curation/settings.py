@@ -15,11 +15,11 @@ import secrets
 class Config(object):
 	ENV = environ.get('FLASK_ENV', default="production")
 	DEBUG = ENV == "development"
-	SECRET_KEY = 'dev'
+	SECRET_KEY = secrets.token_hex(24)
 	TESTING = False
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-	SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI', default="sqlite:///:memory:")
+	SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
 
 
 class DevelopmentConfig(Config):
@@ -27,7 +27,6 @@ class DevelopmentConfig(Config):
 
 
 class ProductionConfig(Config):
-	SECRET_KEY = secrets.token_hex(24)
 	pass
 
 
