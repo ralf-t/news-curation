@@ -1,4 +1,3 @@
-## SETUP
 
 #### SETUP (@ CMD)
 1. Make a copy of the file `.env.example`, rename it to `.env`, and set environment variables. Or don't change content of file to use default values for development. See `.env.example` file for reference
