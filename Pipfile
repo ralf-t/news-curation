@@ -15,6 +15,7 @@ faker = "*"
 flask-login = "*"
 flask-bcrypt = "*"
 bcrypt = "*"
+flask-wtf = "*"
 
 [dev-packages]
 
