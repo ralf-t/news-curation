@@ -1,3 +1,5 @@
+"""SOFTWARE TESTER. Contains requisite functions (fixtures) for testing"""
+
 '''
 db
 https://flask.palletsprojects.com/en/2.0.x/tutorial/database/

@@ -1,3 +1,5 @@
+"""SOFTWARE TESTER. Test application factory and route responses"""
+
 '''
 test cases
 https://flask.palletsprojects.com/en/2.0.x/testing/

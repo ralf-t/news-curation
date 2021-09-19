@@ -11,3 +11,4 @@ class PkModel(db.Model):
 
     __abstract__ = True
     id = Column(db.Integer, primary_key=True)
+    

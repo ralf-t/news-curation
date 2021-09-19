@@ -3,18 +3,29 @@
 from flask import Flask
 from os import environ
 
-from news_curation import commands, settings
+from news_curation import (
+	commands, 
+	settings, 
+	post, 
+	user, 
+	topic
+	)
+
 from news_curation.extensions import (
-	db
+	db,
+	login_manager,
+	bcrypt
 	)
 
 def create_app(test_config=None):
 	"""App Factory"""
 	app = Flask(__name__)
 
+	# apply config if may custom test config + test defaults 
 	if not test_config is None:
 		app.config.from_object(settings.TestingConfig)
 		app.config.from_mapping(test_config)
+	# use env defaults
 	elif environ['FLASK_ENV'] == 'development':
 		app.config.from_object(settings.DevelopmentConfig)
 	elif environ['FLASK_ENV'] == 'production':
@@ -28,11 +39,17 @@ def create_app(test_config=None):
 
 def register_extensions(app):
 	db.init_app(app)
+	login_manager.init_app(app)
+	bcrypt.init_app(app)
 	return None
 
 def register_blueprints(app):
+	app.register_blueprint(user.bp, url_prefix="/user")
+	app.register_blueprint(post.bp, url_prefix="/post")
+	app.register_blueprint(topic.bp, url_prefix="/topic")
 	return None
 
 def register_commands(app):
 	app.cli.add_command(commands.go)
+	app.cli.add_command(commands.seeder_cli)
 	return None
