@@ -1,7 +1,6 @@
 """Factories to help in tests"""
 from news_curation.database import db
 from news_curation.user.models import User
-from news_curation.extensions import bcrypt
 
 from factory import Sequence, PostGenerationMethodCall
 from factory.alchemy import SQLAlchemyModelFactory
