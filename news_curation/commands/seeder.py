@@ -14,9 +14,6 @@ import random
 from os import environ, system
 from faker import Faker
 
-# todo
-# connect sqlite
-
 environ["FLASK_ENV"] = "seeder"
 
 @seeder_cli.command("setup")
