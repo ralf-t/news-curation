@@ -4,9 +4,12 @@
 # you don’t have to set the FLASK_APP environment variable.
 
 from news_curation import create_app
+from os import environ
 
 app = create_app()
 
-if __name__ == '__main__':
+if environ.get('FLASK_ENV') == "seeder":
+    pass
+elif __name__ == '__main__':
     app.run()
 

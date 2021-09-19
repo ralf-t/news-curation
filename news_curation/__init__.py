@@ -17,16 +17,18 @@ from news_curation.extensions import (
 	bcrypt
 	)
 
+FLASK_ENV = environ['FLASK_ENV']
+
 def create_app(test_config=None):
 	"""App Factory"""
 	app = Flask(__name__)
-
-	if not test_config is None:
+	
+	if FLASK_ENV == "test":
 		app.config.from_object(settings.TestingConfig)
 		app.config.from_mapping(test_config)
-	elif environ['FLASK_ENV'] == 'development':
+	elif FLASK_ENV == 'development' or FLASK_ENV == 'seeder':
 		app.config.from_object(settings.DevelopmentConfig)
-	elif environ['FLASK_ENV'] == 'production':
+	elif FLASK_ENV == 'production' or FLASK_ENV == 'seeder':
 		app.config.from_object(settings.ProductionConfig)
 
 	register_extensions(app)
