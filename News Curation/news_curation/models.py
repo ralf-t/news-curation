@@ -1,24 +1,25 @@
-"""User models"""
-
 from datetime import datetime
-from news_curation.extensions import db, login_manager
+from news_curation import db, login_manager
 from flask_login import UserMixin
 
-# for login
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
-
-# relationship tables
+# secondary table for User and Topic model
+# Shows which users are interested in a certain topic 
 user_interests = db.Table('user_interests',
                 db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
                 db.Column('topic_id', db.Integer, db.ForeignKey('topic.id'))
             )
 
+# table for saved posts
 saves = db.Table('saves',
         db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
         db.Column('post_id', db.Integer, db.ForeignKey('post.id'))
         )
+
+#for user login
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
 
 class User(db.Model, UserMixin):
         id = db.Column(db.Integer, primary_key=True)
@@ -45,3 +46,22 @@ class User(db.Model, UserMixin):
         def __repr__(self):     #what will be printed out when we print this model
             return f"User('{self.first_name} {self.last_name}', '{self.username}', '{self.email}', '{self.profile_picture}')"
 
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    content = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    #use the author attribute to access post author details
+
+    def __repr__(self):
+        return f"Post('{self.title}', '{self.created_at}')"
+
+class Topic(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    topic = db.Column(db.String(30), nullable=False)
+
+    def __repr__(self):
+        return f"Topic('{self.id}', '{self.topic}')"
