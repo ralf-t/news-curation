@@ -127,7 +127,7 @@ h1,h2,h3,h4,h5,h6 {
  }
 
 .btn-grad:hover {
-    background-position: right center; /* change the direction of the change here */
+    background-position: right center;
     color: #fff;
     text-decoration: none;
  }
@@ -194,16 +194,37 @@ i {
     box-shadow: 2px 1000px 1px #ffffff inset;
 }
 
- .btn-topic:hover, .btn-topic:focus {
+.btn-topic:hover, .btn-topic:focus {
     background-position: right center;
     box-shadow: none;
     color: white;
  }
 
- i.topic {
-     display: inline;
+i.topic {
+    display: inline;
     color: #ffffff;
  }
+
+i.topic {
+    display: inline;
+    color: #ffffff;
+}
+
+.btn-icon{
+    box-shadow: none;
+    padding: 0;
+    color: #919191;
+}
+
+.btn-icon:hover, .btn-icon:focus {
+    box-shadow: none;
+    font-weight: 700;
+    color: #919191;
+}
+
+.icon-left {
+    display: inline;
+}
 
 /*for mobile phone*/
 @media only screen and (max-width: 768px) {
@@ -214,7 +235,7 @@ i {
         width: 100%;
     }
     .navbar-nav {
-        background: rgba(145, 145, 145, .95);
+        background: rgba(170, 170, 170, 0.95);
         margin-top: 5px;
     }
 }
