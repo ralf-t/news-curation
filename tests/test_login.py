@@ -53,7 +53,9 @@ TC5.	Checking functionality of 'CANCEL' button.
 
 import pytest
 from news_curation import create_app
+from news_curation.extensions import db, bcrypt
 from news_curation.user.forms import LoginForm
+from news_curation.user.models import User
 
 def save(obj):
 	db.session.add(obj)
@@ -74,7 +76,9 @@ class TestLoginForm:
 		assert b'Username' in response
 		assert b'Password' in response
 		assert b'Forgot' in response
-		assert b'Sign in' in response or b'Log in' in response or b'Login' in response
+		assert b'Sign in' in response or \
+				b'Log in' in response or \
+				b'Login' in response
 
 		# TODO here: apply frontend testing 
 
@@ -87,7 +91,11 @@ class TestLoginForm:
 	def test_validate_success(self, user):
 		"""Login successful"""
 		save(user)
-		# form = LoginForm(username=user.username, password="osmanthus!wine")
+		form = LoginForm(username=user.username, password=user.password)
+		user = User.query.filter_by(username=user.username).first()
+		assert user
+		assert bcrypt.check_password_hash(user.password, form.password)
+		assert form.user == user
 		# assert form.validate() is True
 		# assert form.user == user
 
