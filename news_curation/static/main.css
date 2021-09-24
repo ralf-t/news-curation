@@ -149,6 +149,10 @@ i {
     text-align: center;
 }
 
+img {
+    z-index: -1;
+}
+
 .profile-container {
     position: absolute;
     top: 60%;
