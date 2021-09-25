@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
+
 {% block title %}Login{% endblock %}
+
 {% block content %}
 	<!-- Contents -->
 	<div class="login-container shadow-sm">
@@ -63,58 +65,3 @@
 	    </div>
 	</div>
 {% endblock %}
-
-{# BACKEND ONLY
-{% block content %}
-	<div class="content-section">
-		<!-- ST: added id to form for testing -->
-		<form id="loginForm" action="" method="POST">
-			{{ form.hidden_tag() }} 	<!-- IMPORTANT FOR SECURITY -->
-			<fieldset class="form-group">
-				<legend class="border-bottom mb-4">Log In</legend>
-				
-				<div class="form-group">
-					{{ form.username.label(class="form-control-label") }}
-					<!-- displaying error for invalid input -->
-					{% if form.username.errors %}
-						{{ form.username(class="form-control is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.username.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.username(class="form-control form-control") }}
-					{% endif %}
-					<!-- displaying error for invalid input -->
-				</div>
-				<div class="form-group">
-					{{ form.password.label(class="form-control-label") }}
-					<!-- displaying error for invalid input -->
-					{% if form.password.errors %}
-						{{ form.password(class="form-control is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.password.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.password(class="form-control form-control") }}
-					{% endif %}
-					<!-- displaying error for invalid input -->
-				</div>
-				<div class="form-check">
-					{{ form.remember(class="form-check-input") }}
-					{{ form.remember.label(class="form-check-label") }}
-				</div>	
-			</fieldset>
-			<div class="form-group">
-				{{ form.submit(class="btn btn-outline-info") }}
-			</div>
-			<small class="text-muted ms-2">
-				<a href="#">Forgot Password?</a>
-			</small>
-		</form>
-	</div>
-{% endblock content %}
-#}
