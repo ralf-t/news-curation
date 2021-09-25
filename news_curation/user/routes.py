@@ -5,11 +5,22 @@ from news_curation.extensions import bcrypt, db
 
 from news_curation.user import bp
 from news_curation.user.forms import LoginForm, RegistrationForm
-from news_curation.user.models import User
+from news_curation.user.models import User, user_interests
+
+from news_curation.post.models import Post
+from news_curation.topic.models import Topic, topics
+
 
 @bp.route("/")
 def home():
-    return render_template('user/home.html')
+    if current_user.is_authenticated: #posts are only filtered for logged-in users; anonymouse users see all posts
+        # join all tables then filter posts by the interests of current user
+        posts = Post.query.join(topics, Post.id == topics.c.post_id).join(user_interests, topics.c.topic_id == user_interests.c.topic_id).filter_by(user_id=current_user.id)
+
+        return render_template('user/home.html', posts=posts)
+    else:
+        posts = Post.query.all()
+        return render_template('user/home.html', posts=posts)
 
 @bp.route("/register", methods=['GET', 'POST'])
 def register():
