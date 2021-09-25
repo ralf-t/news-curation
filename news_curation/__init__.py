@@ -22,11 +22,13 @@ FLASK_ENV = environ['FLASK_ENV']
 def create_app(test_config=None):
 	"""App Factory"""
 	app = Flask(__name__)
-	
-	if FLASK_ENV == "test":
+
+	# apply config if may custom test config + test defaults 
+	if not test_config is None:
 		app.config.from_object(settings.TestingConfig)
 		app.config.from_mapping(test_config)
-	elif FLASK_ENV == 'development' or FLASK_ENV == 'seeder':
+	# use env defaults
+	elif environ['FLASK_ENV'] == 'development':
 		app.config.from_object(settings.DevelopmentConfig)
 	elif FLASK_ENV == 'production' or FLASK_ENV == 'seeder':
 		app.config.from_object(settings.ProductionConfig)
@@ -50,6 +52,6 @@ def register_blueprints(app):
 	return None
 
 def register_commands(app):
-	app.cli.add_command(commands.go)
+	app.cli.add_command(commands.up)
 	app.cli.add_command(commands.seeder_cli)
 	return None

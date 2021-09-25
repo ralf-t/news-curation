@@ -114,7 +114,6 @@ def setUp():
         print("DB setup aborted!")
 
 
-
 @seeder_cli.command("teardown")
 @with_appcontext
 def tearDown():

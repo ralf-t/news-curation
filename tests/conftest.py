@@ -1,5 +1,3 @@
-"""SOFTWARE TESTER. Contains requisite functions (fixtures) for testing"""
-
 '''
 db
 https://flask.palletsprojects.com/en/2.0.x/tutorial/database/
@@ -24,8 +22,11 @@ import pytest
 import logging
 
 from news_curation import create_app
-from webtest import TestApp
 from news_curation.database import db as _db
+from news_curation.extensions import bcrypt
+
+from .factories import UserFactory
+from webtest import TestApp
 
 @pytest.fixture
 def app():
@@ -62,4 +63,7 @@ def db(app):
 @pytest.fixture
 def user(db):
 	"""Create user for tests"""
-	pass
+	psw = bcrypt.generate_password_hash("osmanthus!wine")
+	user = UserFactory(password=psw)
+	db.session.commit()
+	return user

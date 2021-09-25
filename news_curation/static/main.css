@@ -1,0 +1,243 @@
+body {
+    background-color: #efefef;
+    font-family: 'Nunito', sans-serif;
+}
+
+p {
+    font-weight: 300;
+    font-size: 1.2em;
+    color: #919191;
+}
+
+p.input {
+    font-weight: 300;
+    font-size: 1.2em;
+    color: #919191;
+}
+
+p.title {
+    font-weight: 300;
+    font-size: 1.2em;
+    color: #25274d;
+}
+
+small {
+    color: #919191;
+    font-size: 1em;
+    font-weight: 300;
+}
+
+h1,h2,h3 {
+    font-weight: 900;
+    color: #25274d;
+    margin-bottom: -3px;
+}
+h5 {
+    font-weight: 900;
+    color: #919191;
+}
+
+.navbar-logo {
+    font-weight: 900;
+    font-size: 1.5em;
+}
+
+.nav-link {
+    font-weight: 700;
+}
+
+.navbar-nav.open {
+    color: black;
+}
+
+.active {
+    background-color: rgba(255,255,255,.25);
+}
+
+.header {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 60px;
+    object-fit: cover;
+    box-shadow: 0px 2px 10px 2px rgba(50,50,50,.1);
+}
+
+.header-lg {
+    z-index: -1;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 50%;
+    object-fit: cover;
+    box-shadow: 0px 2px 10px 2px rgba(50,50,50,.1);
+}
+
+.content-container {
+    background-color: #ffffff;
+    width: 800px;
+}
+
+.post-profile {
+    width: 65px;
+    height: 65px;
+    border: 4px solid #ffffff;
+}
+
+.login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px;
+    padding: 50px;
+    margin: auto;
+    background-color: #ffffff;
+    z-index: 1;
+}
+
+.input-container {
+    margin: auto;
+    width: 300px;
+}
+
+.highlight {
+    color: #25274d;
+    font-size: 1em;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+
+.btn-grad {
+    background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%)
+}
+
+.btn-grad {
+    padding: 15px;
+    width: 100%;
+    margin-bottom: -15px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 50px;
+    display: block;
+ }
+
+.btn-grad:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+ }
+
+.input-field:focus {
+    box-shadow: none !important;
+    outline: 0px !important;
+}
+
+.input-group-text {
+    text-align: center;
+    width: 50px;
+    border: 0 !important;
+    border-radius: 0.25rem 0 0 0.25rem !important;
+}
+
+i {
+    width: 100%;
+    text-align: center;
+}
+
+.profile-container {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 460px;
+    padding: 50px;
+    text-align: center;
+    background-color: #ffffff;
+    z-index: 1;
+}
+
+.profile-img-container {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    margin-left: -90px;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+.profile-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin: auto;
+    border: 10px solid #ffffff;
+}
+
+.btn-topic {
+    width: 48%;
+    margin-bottom: 25px;
+    text-align: left;
+    font-weight: 700;
+    color: #314755;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 50px;
+    display: block;
+    border: solid 3px transparent;
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(101deg, #314755, #26a0da);
+    background-origin: border-box;
+    box-shadow: 2px 1000px 1px #ffffff inset;
+}
+
+.btn-topic:hover, .btn-topic:focus {
+    background-position: right center;
+    box-shadow: none;
+    color: white;
+ }
+
+i.topic {
+    display: inline;
+    color: #ffffff;
+ }
+
+i.topic {
+    display: inline;
+    color: #ffffff;
+}
+
+.btn-icon{
+    box-shadow: none;
+    padding: 0;
+    color: #919191;
+}
+
+.btn-icon:hover, .btn-icon:focus {
+    box-shadow: none;
+    font-weight: 700;
+    color: #919191;
+}
+
+.icon-left {
+    display: inline;
+}
+
+/*for mobile phone*/
+@media only screen and (max-width: 768px) {
+    .content-container, .login-container{
+        width: 100%;
+    }
+    .btn-topic {
+        width: 100%;
+    }
+    .navbar-nav {
+        background: rgba(170, 170, 170, 0.95);
+        margin-top: 5px;
+    }
+}

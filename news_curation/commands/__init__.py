@@ -13,13 +13,11 @@ seeder_cli = AppGroup("seeder")
 
 # not using @app.cli to avoid doing create_app here lol
 
-@click.command('go')
+@click.command('up')
 @click.argument('flask_env', default='dev')
 @with_appcontext
-def go(flask_env):
-	"""Run flask app within the specified environment. flask go test; flask go prod; flask go dev"""
-	environ['FLASK_ENV'] = 'test' if flask_env == 'test' else 'development'
-	environ['FLASK_ENV'] = 'development' if flask_env == 'dev' else 'development'
+def up(flask_env):
+	"""Run flask app within the specified environment. flask up test; flask up prod; flask up dev"""
 	environ['FLASK_ENV'] = 'production' if flask_env == 'prod' else 'development'
 	system('flask run')	
 
