@@ -1,7 +1,6 @@
 #### TODO
 - Navbar active state stuck @ home
 - Cleaning & button label corrections
-- Pull home page backend
 
 
 
