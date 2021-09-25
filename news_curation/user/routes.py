@@ -13,6 +13,9 @@ from news_curation.topic.models import Topic, topics
 
 @bp.route("/")
 def home():
+
+    # can be also done using only one if and return
+
     if current_user.is_authenticated: #posts are only filtered for logged-in users; anonymouse users see all posts
         # join all tables then filter posts by the interests of current user
         posts = Post.query.join(topics, Post.id == topics.c.post_id).join(user_interests, topics.c.topic_id == user_interests.c.topic_id).filter_by(user_id=current_user.id)
