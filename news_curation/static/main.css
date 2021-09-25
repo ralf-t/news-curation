@@ -65,6 +65,7 @@ h5 {
 }
 
 .header-lg {
+    z-index: -1;
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -77,8 +78,6 @@ h5 {
 .content-container {
     background-color: #ffffff;
     width: 800px;
-    z-index: -1;
-    
 }
 
 .post-profile {
@@ -97,7 +96,7 @@ h5 {
     padding: 50px;
     margin: auto;
     background-color: #ffffff;
-    z-index: 2;
+    z-index: 1;
 }
 
 .input-container {
@@ -153,10 +152,6 @@ i {
     text-align: center;
 }
 
-img {
-    z-index: -1;
-}
-
 .profile-container {
     position: absolute;
     top: 60%;
@@ -167,7 +162,7 @@ img {
     padding: 50px;
     text-align: center;
     background-color: #ffffff;
-    z-index: 2;
+    z-index: 1;
 }
 
 .profile-img-container {

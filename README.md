@@ -1,3 +1,7 @@
+#### TODO
+- Navbar active state stuck @ home
+
+
 
 #### SETUP
 1. Make a copy of the file `.env.example`, rename it to `.env`, and set environment variables. Or don't change content of file to use default values for development. See `.env.example` file for reference
@@ -22,3 +26,5 @@
 	`flask routes`
 2. Test application after changes are made using:
 	`pytest`
+
+

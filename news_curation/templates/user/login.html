@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% block title %}Login{% endblock %}
 {% block content %}
 	<!-- Contents -->
 	<div class="login-container shadow-sm">
@@ -8,47 +9,48 @@
 	    	<!-- ST: added id to form for testing -->
 	        <form id="loginForm" action="" method="POST">
 	        	{{ form.hidden_tag() }} 	<!-- IMPORTANT FOR SECURITY -->
-	            <div class="input-group mb-3">
-	                <span class="input-group-text"><i class="fas fa-user"></i></span>
-	                <!-- displaying error for invalid input -->
-					{% if form.username.errors %}
-						{{ form.username(class="form-control is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.username.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-		                <input type="text" name="username" class="form-control input-field" placeholder="Enter username here">
-					{% endif %}
-					<!-- displaying error for invalid input -->
-	                <br>
-	            </div>
-	            <div class="input-group mb-2">
-	                <span class="input-group-text"><i class="fas fa-key"></i></span>
-	                <!-- displaying error for invalid input -->
-					{% if form.password.errors %}
-						{{ form.password(class="form-control is-invalid") }}
-						<div class="invalid-feedback">
-							{% for error in form.password.errors %}
-								<span>{{ error }}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-		                <input type="password" name="password" class="form-control input-field" placeholder="Enter password here">
-					{% endif %}
-					<!-- displaying error for invalid input -->
-	            </div>
-	            <div class="form-check">
-		        	{{ form.remember(class="form-check-input") }}
-		        	{{ form.remember.label(class="form-check-label") }}
-	            </div>
-	            <!-- TODO: button length -->
-	            <div class="d-flex justify-content-center mt-4 login_container">
-	            	<div class="form-group">
-						{{ form.submit(class="btn btn-grad") }}
-					</div>
-	                <!-- <button type="button" name="button" class="btn btn-grad">Login</button> -->
+	        	<fieldset class="form-group">
+	        		<!-- USERNAME -->
+		            <div class="input-group mb-3">
+		                <span class="input-group-text"><i class="fas fa-user"></i></span>
+		                <!-- displaying error for invalid input -->
+						{% if form.username.errors %}
+							{{ form.username(class="form-control is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.username.errors %}
+									<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.username(class="form-control input-field", placeholder="Enter username here") }}
+						{% endif %}
+						<!-- displaying error for invalid input -->
+		                <br>
+		            </div>
+		            <!-- PASSWORD -->
+		            <div class="input-group mb-2">
+		                <span class="input-group-text"><i class="fas fa-key"></i></span>
+		                <!-- displaying error for invalid input -->
+						{% if form.password.errors %}
+							{{ form.password(class="form-control is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.password.errors %}
+									<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.password(class="form-control input-field", placeholder="Enter password here") }}
+						{% endif %}
+						<!-- displaying error for invalid input -->
+		            </div>
+		            <div class="form-check mb-2">
+			        	{{ form.remember(class="form-check-input") }}
+			        	{{ form.remember.label(class="form-check-label") }}
+		            </div>
+	        	</fieldset>
+
+	        	<div class="form-group">
+					{{ form.submit(class="btn btn-grad") }}
 	            </div>
 	        </form>
 	    </div>
@@ -62,7 +64,7 @@
 	</div>
 {% endblock %}
 
-{# 
+{# BACKEND ONLY
 {% block content %}
 	<div class="content-section">
 		<!-- ST: added id to form for testing -->
