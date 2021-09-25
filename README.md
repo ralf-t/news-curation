@@ -27,5 +27,9 @@
 	`flask routes`
 2. Test application after changes are made using:
 	`pytest`
+3. Reset database (the db specified at .env file) and populate with dummy data using:
+	`flask seeder setup`
+4. Drop tables using:
+	`flask seeder teardown`
 
 
