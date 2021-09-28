@@ -1,6 +1,8 @@
 #### TODO
-- Navbar active state stuck @ home
-- Cleaning & button label corrections
+- Login & Home modules
+	- pull updates from main branch
+	- Navbar active state stuck @ home
+	- Cleaning & button label corrections
 
 
 
