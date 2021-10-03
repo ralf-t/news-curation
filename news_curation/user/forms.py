@@ -13,7 +13,6 @@ class RegistrationForm(FlaskForm):
 	username = StringField('Username', validators=[DataRequired(), 
 												# ST: https://security.stackexchange.com/questions/46875/why-is-there-a-minimum-username-length
 												Length(6, 20, 'Username must be between 6 and 20 characters long.'),
-												# ST: not tested
 												Regexp('^[a-zA-Z0-9]+$', message="Username must not include special characters.")])
 	email = StringField('Email', validators=[DataRequired(), Email()])
 
