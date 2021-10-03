@@ -4,8 +4,10 @@ LEFT AT: factories -> user, models
 
 
 ================================================================================
+OCT 11-15 PLANS:
+
 OCT 4-8 PLANS:
-- 
+- write initial test cases for registration and home page 
 
 SEPT 27-OCT 1 PLANS:
 - test finished modules

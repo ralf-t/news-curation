@@ -1,9 +1,11 @@
 #### TODO
 - Login & Home modules
-	- pull updates from main branch
 	- Navbar active state stuck @ home
-	- Cleaning & button label corrections
-
+	- Macro cleaning
+	- Routes homepage filter --> reduce code
+	- Forgot password empty page
+- Changes (for collab)
+	- [ask SD if design good] LOGIN P: added remember & forgot password options
 
 
 #### SETUP
