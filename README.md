@@ -14,8 +14,8 @@
 	`pipenv shell`
 3. Then install project dependencies (extensions/ packages/ libraries) using:
 	`pipenv install`
-4. Drop existing tables and create new ones using:
-	`flask reset-tables`
+4. Reset database (the db specified at .env file) and populate with dummy data using:
+	`flask seeder setup`
 5. Run the app (must be inside virtual env) using:
 	`flask run`
 * Alternatively, run app in development using:
