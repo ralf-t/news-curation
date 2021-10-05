@@ -1,3 +1,8 @@
+Checking functionality of post buttons when user isn't logged in
+
+
+
+
 ##########################################################
 Checking functionality of 'REGISTER' button when credentials are not entered:
 
