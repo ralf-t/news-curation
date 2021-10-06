@@ -13,7 +13,7 @@
 
 <div class="login-container shadow-sm">
     <h1 class="text-center">Welcome!</h1>
-    <p class="title text-center">Please log in or sign up to continue</p>
+    <p class="title text-center">Please sign up to continue</p>
     <div class="input-container">
         <!-- ST: added id to form for testing -->
         <form id="registerForm" action="" method="POST">
@@ -30,7 +30,7 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.first_name(class="form-control input-field", placeholder="Enter firstname here") }}
+                    {{ form.first_name(class="form-control input-field", placeholder="First Name*") }}
                 {% endif %}
                 <!-- displaying error for invalid input -->
             </div>
@@ -47,7 +47,7 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.last_name(class="form-control input-field", placeholder="Enter lastname here") }}
+                    {{ form.last_name(class="form-control input-field", placeholder="Last Name*") }}
                 {% endif %}
                 <!-- displaying error for invalid input -->
             </div>
@@ -65,7 +65,7 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.username(class="form-control input-field", placeholder="Enter username here") }}
+                    {{ form.username(class="form-control input-field", placeholder="Username*") }}
                 {% endif %}
                 <!-- displaying error for invalid input -->
             </div>
@@ -82,7 +82,7 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.email(class="form-control input-field", placeholder="Enter email here") }}
+                    {{ form.email(class="form-control input-field", placeholder="Email*") }}
                 {% endif %}
                 <!-- displaying error for invalid input -->
             </div>
@@ -99,7 +99,7 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.password(class="form-control input-field", placeholder="Enter password here") }}
+                    {{ form.password(class="form-control input-field", placeholder="Password*") }}
                 {% endif %}
                 <!-- displaying error for invalid input -->
             </div>
@@ -116,11 +116,11 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.confirm_password(class="form-control input-field", placeholder="Re-enter password here") }}
+                    {{ form.confirm_password(class="form-control input-field", placeholder="Confirm Password*") }}
                 {% endif %}
                 <!-- displaying error for invalid input -->
             </div>
-
+            <div class="alert alert-info p-2 mt-2 text-secondary">Fields marked with '*' are required.</div>
             <div class="d-flex justify-content-center mt-4 login_container">
                 {{ form.submit(class="btn btn-grad") }}
             </div>
