@@ -6,7 +6,7 @@
 	<!-- Contents -->
 	<div class="login-container shadow-sm">
 	    <h1 class="text-center">Welcome!</h1>
-	    <p class="title text-center">Please log in or sign up to continue</p>
+	    <p class="title text-center">Please log in to continue</p>
 	    <div class="input-container mt-4">
 	    	<!-- ST: added id to form for testing -->
 	        <form id="loginForm" action="" method="POST">
@@ -24,7 +24,7 @@
 								{% endfor %}
 							</div>
 						{% else %}
-							{{ form.username(class="form-control input-field", placeholder="Enter username here") }}
+							{{ form.username(class="form-control input-field", placeholder="Username") }}
 						{% endif %}
 						<!-- displaying error for invalid input -->
 		                <br>
@@ -41,7 +41,7 @@
 								{% endfor %}
 							</div>
 						{% else %}
-							{{ form.password(class="form-control input-field", placeholder="Enter password here") }}
+							{{ form.password(class="form-control input-field", placeholder="Password") }}
 						{% endif %}
 						<!-- displaying error for invalid input -->
 		            </div>
