@@ -1,11 +1,11 @@
 #### TODO
 - Login & Home modules
-	- Navbar active state stuck @ home
 	- Macro cleaning
 	- Routes homepage filter --> reduce code
-	- Forgot password empty page
-- Changes (for collab)
-	- [ask SD if design good] LOGIN P: added remember & forgot password options
+- Registration for firstname, lastname does not work for the ff input:
+	- T'challa
+	- O'brien
+	- J'onn
 
 
 #### SETUP
