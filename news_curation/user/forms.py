@@ -8,20 +8,22 @@ class RegistrationForm(FlaskForm):
 		validators=[
 			DataRequired(), 
 			Length(min=2, max=15), 
-			Regexp('^[A-Za-z\'\-.]+$', message='First name cannot contain special characters.')
+			# Regexp('^([A-Z][a-z]+([ ]?[a-z]?[\'-]?[A-Z][a-z]+)*)$', message='First name cannot contain special characters.')
+			Regexp('^([A-Z]*[a-z]+([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='First name cannot contain special characters.')
 		], 
 		render_kw={"placeholder": "First Name*"})
 	
 	last_name = StringField('Last Name', validators=[
 			DataRequired(), 
 			Length(min=2, max=15),
-			Regexp('^[A-Za-z\'\-.]+$', message='Last name cannot contain special characters.')
+			Regexp('^([A-Z]*[a-z]+([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='Last name cannot contain special characters.')
 		], 
 		render_kw={"placeholder": "Last Name*"})
 	
 	username = StringField('Username', validators=[
 			DataRequired(), 
-			Length(min=2, max=20)
+			Length(min=2, max=20),
+			Regexp('^[A-Z0-9a-z\-._]+$', message='Username should only contain letters, numbers, dashes, periods, and underscores.')
 		], 
 		render_kw={"placeholder": "Username*"})
 	
@@ -42,25 +44,12 @@ class RegistrationForm(FlaskForm):
 		user = User.query.filter_by(username=username.data).first()
 		if user:
 			raise ValidationError('This username is taken. Please choose another one.')
-		
-		#validation for invalid characters
-		excluded_chars = "*?!^+%&/()=}][{$#<>,"
-		for char in self.username.data:
-			if char in excluded_chars:
-				raise ValidationError(f"Character {char} is not allowed.")
 
 	def validate_email(self, email):
 		#validation for duplicate email
 		user = User.query.filter_by(email=email.data).first()
 		if user:
 			raise ValidationError('This email is already taken. Please choose another one.')
-
-	# def special_char_username(self, username):
-	# 	#validation for invalid characters
-	# 	excluded_chars = " *?!'^+%&/()=}][{$#"
- #    	for char in self.username.data:
- #        	if char in excluded_chars:
- #            	raise ValidationError(f"Character {char} is not allowed in username.")
 
 class LoginForm(FlaskForm):
 	username = StringField('Username', validators=[DataRequired()])
