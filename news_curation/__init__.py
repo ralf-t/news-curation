@@ -14,7 +14,8 @@ from news_curation import (
 from news_curation.extensions import (
 	db,
 	login_manager,
-	bcrypt
+	bcrypt,
+	meld
 	)
 
 FLASK_ENV = environ['FLASK_ENV']
@@ -43,6 +44,7 @@ def register_extensions(app):
 	db.init_app(app)
 	login_manager.init_app(app)
 	bcrypt.init_app(app)
+	meld.init_app(app)
 	return None
 
 def register_blueprints(app):
