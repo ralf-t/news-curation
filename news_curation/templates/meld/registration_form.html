@@ -5,7 +5,7 @@
     <p class="title text-center">Please sign up to continue</p>
     <div class="input-container">
         <!-- ST: added id to form for testing -->
-        <form id="registerForm" action="" method="POST">
+        <form meld:submit.prevent id="registerForm" action="" method="POST">
             {{ form.hidden_tag() }}
 
             {{field('first_name', fa_icon='user', form=form)}}
@@ -17,7 +17,10 @@
 
             <div class="alert alert-info p-2 mt-2 text-secondary">Fields marked with '*' are required.</div>
             <div class="d-flex justify-content-center mt-4 login_container">
-                {{ form.submit(class="btn btn-grad", **{'meld:click': "submit()"}) }}
+                {{ form.submit(class="btn btn-grad",
+                    **{"meld:click": "save()",
+                        "meld:loading.attr": "disabled",
+                        "meld:loading.class": "opacity-80 cursor-not-allowed"}) }}
             </div>
         </form>
     </div>
