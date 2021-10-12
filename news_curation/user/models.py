@@ -42,6 +42,8 @@ class User(db.Model, UserMixin):
 
         authored_posts = db.relationship('Post', backref='author', lazy=True)
 
+        comments = db.relationship('Comment', backref='author', lazy=True)
+
         def __repr__(self):     #what will be printed out when we print this model
             return f"User('{self.first_name} {self.last_name}', '{self.username}', '{self.email}', '{self.profile_picture}')"
 

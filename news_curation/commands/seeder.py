@@ -8,6 +8,7 @@ from news_curation.commands import with_appcontext, seeder_cli
 from news_curation.user.models import User
 from news_curation.post.models import Post
 from news_curation.topic.models import Topic
+from news_curation.comment.models import Comment
 
 import click
 import random
@@ -92,7 +93,14 @@ def setUp():
         for u in User.query.all():
             # can also save own post
             for i in range(random.randint(2,5)):
-                u.saved_posts.append(random_post())
+                post = random_post()
+                u.saved_posts.append(post)
+                
+                # give a comment
+                comment = Comment()
+                comment.author = u
+                comment.post = post
+                comment.content = fake.paragraph(nb_sentences=2, variable_nb_sentences=True)
         
         # admin
         user = User(
