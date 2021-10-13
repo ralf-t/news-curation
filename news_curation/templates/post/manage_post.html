@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+	<form action="" method="POST">
+		{{ form.hidden_tag() }} 	<!-- IMPORTANT FOR SECURITY -->
+		<fieldset class="form-group">
+			<legend class="border-bottom mb-4">{{ legend }}</legend>
+			
+			<div class="form-group">
+				{{ form.title.label(class="form-control-label") }}
+				<!-- displaying error for invalid input -->
+				{% if form.title.errors %}
+					{{ form.title(class="form-control is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.title.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.title(class="form-control form-control") }}
+				{% endif %}
+				<!-- displaying error for invalid input -->
+			</div>
+			<div class="form-group">
+				{{ form.content.label(class="form-control-label") }}
+				<!-- displaying error for invalid input -->
+				{% if form.content.errors %}
+					{{ form.content(class="form-control is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.content.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.content(class="form-control form-control") }}
+				{% endif %}
+				<!-- displaying error for invalid input -->
+			</div>
+			<div class="form-group">
+				{{ form.topics.label(class="form-control-label") }}
+				<!-- displaying error for invalid input -->
+				{% if form.topics.errors %}
+					{{ form.topics(class="form-control is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.topics.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.topics(class="form-select") }}
+				{% endif %}
+				<!-- displaying error for invalid input -->
+
+				<!-- button for adding tag -->
+				{{ form.add_topic(class="btn btn-success mb-3") }}
+			</div>
+
+			<!-- displaying added tags -->
+			{% for tag in tags %}
+			    <input type=submit class="btn btn-sm btn-secondary" name="tag_to_remove" value="{{ tag }}">
+			{% endfor %}
+		</fieldset>
+		<div class="form-group mt-5">
+			{{ form.submit(class="btn btn-info") }}
+		</div>
+	</form>
+</div>
+{% endblock content %}
