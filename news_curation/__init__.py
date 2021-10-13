@@ -5,7 +5,7 @@ from os import environ
 
 from news_curation import (
 	commands, 
-	settings, 
+	config, 
 	post, 
 	user, 
 	topic
@@ -26,13 +26,13 @@ def create_app(test_config=None):
 
 	# apply config if may custom test config + test defaults 
 	if not test_config is None:
-		app.config.from_object(settings.TestingConfig)
+		app.config.from_object(config.TestingConfig)
 		app.config.from_mapping(test_config)
 	# use env defaults
 	elif environ['FLASK_ENV'] == 'development':
-		app.config.from_object(settings.DevelopmentConfig)
+		app.config.from_object(config.DevelopmentConfig)
 	elif FLASK_ENV == 'production' or FLASK_ENV == 'seeder':
-		app.config.from_object(settings.ProductionConfig)
+		app.config.from_object(config.ProductionConfig)
 
 	register_extensions(app)
 	register_blueprints(app)
