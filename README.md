@@ -8,7 +8,7 @@
 
 
 - problems: cannot do lazy validation
-			fails submission for invalid inputs
+			still cant make flask flash work with meld component
 			render_kw does not work after melding
 
 - continue: [fork a package & customize](https://stackoverflow.com/questions/23075397/python-how-to-edit-an-installed-package)
