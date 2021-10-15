@@ -1,3 +1,7 @@
+html {
+    height: 100%;
+}
+
 body {
     background-color: #efefef;
     font-family: 'Nunito', sans-serif;
@@ -226,6 +230,56 @@ i.topic {
 
 .icon-left {
     display: inline;
+}
+
+input[type=text]:read-only{
+    background-color: #ffffff;
+}
+
+input[type=text]:read-only:hover{
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+button, select, textarea, input {
+    box-shadow: none !important;
+    outline: 0px !important;   
+}
+
+textarea {
+    resize: none;
+    width: 100% !important;
+    height: 45px;
+}
+
+textarea.post {
+    resize: none;
+    width: 100% !important;
+    height: 300px;
+}
+
+.btn-post {
+    font-weight: 800;
+}
+
+.btn-post:hover {
+    background-color: #f5f5f5;
+}
+
+.btn-create-post {
+    background-color: #ffffff;
+    width: 100%;
+    text-align: left;
+    color: #919191;
+}
+
+.btn-create-post:hover {
+    background-color: #f5f5f5;
+}
+
+label {
+    color: #25274d;
+    font-weight: 700;
 }
 
 /*for mobile phone*/
