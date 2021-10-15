@@ -12,7 +12,23 @@
 {% endblock %}
 {% block content %}
 	<div class="content-container mx-auto p-5 shadow-sm">
-  <a href="{{ url_for('post.new_post') }}" class="btn btn-primary">Create post</a>
+
+    <!--create post-->
+    <div class="media px-5 py-3 mb-4 rounded shadow-sm">
+      <div class="d-flex align-items-center">
+        <!--image-->
+        <div class="me-2">
+          <img class="post-profile align-self-start mr-3 rounded-circle shadow-sm" src="{{ url_for('static', filename='default.jpg') }}" alt="Generic placeholder image">
+        </div>
+        <!--post bar-->
+        <form action="{{ url_for('post.new_post') }}" class="w-100">
+          <div class="my-4">
+            <input type="submit" class="btn-create-post border border-2 rounded p-2" value="Create Post"/>
+          </div>
+        </form>    
+      </div>  
+    </div>
+
 	{% for post in posts %}
 		<article class="media content-section p-5 mb-4 rounded shadow-sm">
 

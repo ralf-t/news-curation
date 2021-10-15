@@ -20,6 +20,7 @@ tags = []
 def new_post():
     form = PostForm()
     form.topics.choices = [(g.id, g.topic) for g in Topic.query.order_by('topic')] #choices for the topic dropdown.
+    
     if request.method == 'POST':
         if form.submit.data: #when user clicks the 'Post' button
             if form.validate_on_submit():
@@ -43,7 +44,7 @@ def new_post():
             except:
                 tags.append(topic_name) #appends the selected tag to 'tags' if it is not yet in the list
             else:
-                dropdown_error = "This topic has already been added!"
+                dropdown_error = "This tag has already been added!"
                 return render_template('post/manage_post.html', form=form, legend='New Post', tags=tags, dropdown_error=dropdown_error)
 
         elif request.form['tag_to_remove']: #when one of the added tags is clicked (this will remove that tag)
