@@ -39,12 +39,10 @@
 			<div class="form-group">
 				{{ form.topics.label(class="form-control-label") }}
 				<!-- displaying error for invalid input -->
-				{% if form.topics.errors %}
+				{% if dropdown_error %}
 					{{ form.topics(class="form-control is-invalid") }}
 					<div class="invalid-feedback">
-						{% for error in form.topics.errors %}
-							<span>{{ error }}</span>
-						{% endfor %}
+							<span>{{ dropdown_error }}</span>
 					</div>
 				{% else %}
 					{{ form.topics(class="form-select") }}
