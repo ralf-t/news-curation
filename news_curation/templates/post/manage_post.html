@@ -24,7 +24,7 @@
       <div class="d-flex my-4">
         <!--image-->
         <div class="me-2">
-          <img class="post-profile align-self-start mr-3 rounded-circle shadow-sm" src="images/seulgi.jpg" alt="Generic placeholder image">
+          <img class="post-profile align-self-start mr-3 rounded-circle shadow-sm" src="{{ url_for('static', filename='default.jpg') }}" alt="Generic placeholder image">
         </div>
         <!--form-->
         <div class="w-100">
@@ -32,7 +32,6 @@
             {{ form.hidden_tag() }}   <!-- IMPORTANT FOR SECURITY -->
 
             <!-- TITLE -->
-            <!-- <input type="text" class="form-control rounded p-2 mb-2" placeholder="Title"/> -->
             {% if form.title.errors %}
               {{ form.title(class="form-control is-invalid rounded p-2 mb-2") }}
               <div class="invalid-feedback">
@@ -46,8 +45,6 @@
 
 
             <!-- CONTENT -->
-            <!-- <textarea class="form-control post rounded p-2 mb-4" placeholder="Tell us your thoughts..."></textarea> -->
-            <!-- displaying error for invalid input -->
             {% if form.content.errors %}
               {{ form.content(class="form-control is-invalid post rounded p-2 mb-4") }}
               <div class="invalid-feedback">
@@ -62,12 +59,6 @@
 
             <label>Select Tags:</label>
             <div class="input-group mb-2">
-              <!-- <select class="form-select" aria-label="Default select example">
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-              <button class="btn btn-light border" type="button">Add Topic</button> -->
               {% if dropdown_error %}
                 {{ form.topics(class="form-select is-invalid") }}
               	{{ form.add_topic(class="btn btn-light border") }}
@@ -82,7 +73,6 @@
             </div>
 
             <div class="d-flex flex-wrap">
-              <!-- <input type="submit" class="btn btn-sm btn-secondary m-1" name="tag_to_remove" value="sample tag"> -->
               {% for tag in tags %}
                   <input type=submit class="btn btn-sm btn-secondary m-1" name="tag_to_remove" value="{{ tag }}">
               {% endfor %}
@@ -97,7 +87,6 @@
                 Add Image/Video
               </button>
             </div>
-            <!-- <button type="button" name="button" class="btn btn-grad mb-1">Post</button> -->
             {{ form.submit(class="btn btn-grad mb-1") }}
           </form>
         </div>

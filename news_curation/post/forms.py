@@ -8,5 +8,5 @@ class PostForm(FlaskForm):
 	content = TextAreaField('Content', validators=[DataRequired()])
 	topics = SelectField('Topics', coerce=int, validators=[DataRequired()]) #dropdown options are defined in routes.py
 
-	add_topic = SubmitField('Add Topic')
+	add_topic = SubmitField('Add Tag')
 	submit = SubmitField('Post')

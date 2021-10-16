@@ -3,6 +3,7 @@
 <h1>Welcome {{ current_user.username }}</h1>
 <div>
 {% for post in user_posts %}
+<a href="{{ url_for('post.post', post_id=post.id) }}">
 <article class="media content-section p-5 mb-4 rounded shadow-sm">
 			<!--user image and name-->
       <div class="d-flex align-items-center">
@@ -65,6 +66,7 @@
       </div>
       <!--end of comment and rate-->
 </article>
+</a>
 {% endfor %}
 </div>
 {% endblock %}
