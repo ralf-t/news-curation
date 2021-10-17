@@ -9,8 +9,11 @@
 
 - problems: still cant make flask flash work with meld component
 
-- continue: [fork a package & customize](https://stackoverflow.com/questions/23075397/python-how-to-edit-an-installed-package)
+- (render_kw) solution: [fork a package & customize](https://stackoverflow.com/questions/23075397/python-how-to-edit-an-installed-package)
 		  : [flask meld package source](https://github.com/mikeabrahamsen/Flask-Meld/blob/main/flask_meld/component.py)
+		  : [install forked package](https://pip.pypa.io/en/stable/cli/pip_install/)
+		  : [git contributions](https://github.com/firstcontributions/first-contributions)
+
 		  
 #### TODO
 - Login & Home modules
