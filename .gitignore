@@ -8,3 +8,5 @@ logs/
 .env
 
 news_curation/*.db
+
+*.bat

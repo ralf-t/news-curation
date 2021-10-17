@@ -18,7 +18,7 @@ bcrypt = "*"
 factory-boy = "*"
 flask-wtf = "*"
 email-validator = "*"
-flask-meld = "*"
+flask-meld = {editable = true, git = "https://github.com/Iionsroar/Flask-Meld.git"}
 
 [dev-packages]
 
