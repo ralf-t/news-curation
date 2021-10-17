@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, abort
 from flask_login import login_required, current_user
 
 from news_curation.extensions import db
->>>>>>> jev
+
 from news_curation.post import bp
 from news_curation.post.models import Post
 
