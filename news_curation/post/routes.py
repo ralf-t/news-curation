@@ -162,5 +162,3 @@ def delete_post(post_id):
     flash('Post has been deleted!', 'success')
     return redirect(url_for('user.home'))
 
-
->>>>>>> jev
