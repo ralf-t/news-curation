@@ -259,6 +259,12 @@ textarea.post {
     height: 300px;
 }
 
+textarea.comment {
+    resize: none;
+    width: 100% !important;
+    height: 370px;
+}
+
 .btn-post {
     font-weight: 800;
 }
