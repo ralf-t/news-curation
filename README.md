@@ -7,9 +7,7 @@
 	- [Flask Meld Templates](https://docs.flask-meld.dev/templates/)
 
 
-- problems: cannot do lazy validation
-			still cant make flask flash work with meld component
-			render_kw does not work after melding
+- problems: still cant make flask flash work with meld component
 
 - continue: [fork a package & customize](https://stackoverflow.com/questions/23075397/python-how-to-edit-an-installed-package)
 		  : [flask meld package source](https://github.com/mikeabrahamsen/Flask-Meld/blob/main/flask_meld/component.py)
