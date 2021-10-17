@@ -74,7 +74,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('user.home'))
         
         else:
-            flash('Login Unsuccessful. Please check your email and password.', 'danger')
+            flash('Login Unsuccessful. Please check your username and password.', 'danger')
 
     return render_template('user/login.html', form=form)
 
@@ -86,4 +86,5 @@ def logout():
 @bp.route("/profile")
 @login_required     #prevents anonymous user from going to profile page
 def profile():
-    return render_template('user/profile.html')
+    user_posts = Post.query.filter_by(user_id=current_user.id).all()
+    return render_template('user/profile.html', user_posts=user_posts)

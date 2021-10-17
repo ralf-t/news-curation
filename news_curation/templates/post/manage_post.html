@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block style %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+{% endblock %}
+
+{% block title %}Home{% endblock %}
+
+{% block header_class %}
+<!-- classname for small header -->
+	header
+{% endblock %}
+
+{% block content %}
+	<div class="content-container mx-auto p-5 shadow-sm">
+
+    <!--create post-->
+    <div class="media px-5 py-2 my-4 rounded shadow-sm">
+      <!--header-->
+      <div>
+        <h4 class="text-center w-100">{{ legend }}</h4>
+      </div>
+      <!--body-->
+      <div class="d-flex my-4">
+        <!--image-->
+        <div class="me-2">
+          <img class="post-profile align-self-start mr-3 rounded-circle shadow-sm" src="{{ url_for('static', filename='default.jpg') }}" alt="Generic placeholder image">
+        </div>
+        <!--form-->
+        <div class="w-100">
+          <form action="" method="POST">
+            {{ form.hidden_tag() }}   <!-- IMPORTANT FOR SECURITY -->
+
+            <!-- TITLE -->
+            {% if form.title.errors %}
+              {{ form.title(class="form-control is-invalid rounded p-2 mb-2") }}
+              <div class="invalid-feedback">
+                {% for error in form.title.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.title(class="form-control rounded p-2 mb-2") }}
+            {% endif %}
+
+
+            <!-- CONTENT -->
+            {% if form.content.errors %}
+              {{ form.content(class="form-control is-invalid post rounded p-2 mb-4") }}
+              <div class="invalid-feedback">
+                {% for error in form.content.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.content(class="form-control post rounded p-2 mb-4") }}
+            {% endif %}            
+
+
+            <label>Select Tags:</label>
+            <div class="input-group mb-2">
+              {% if dropdown_error %}
+                {{ form.topics(class="form-select is-invalid") }}
+              	{{ form.add_topic(class="btn btn-light border") }}
+                <div class="invalid-feedback">
+                    <span>{{ dropdown_error }}</span>
+                </div>
+              {% else %}
+                {{ form.topics(class="form-select") }}
+              	{{ form.add_topic(class="btn btn-light border") }}
+              {% endif %}
+
+            </div>
+
+            <div class="d-flex flex-wrap">
+              {% for tag in tags %}
+                  <input type=submit class="btn btn-sm btn-secondary m-1" name="tag_to_remove" value="{{ tag }}">
+              {% endfor %}
+            </div>
+            <div class="d-flex">
+              <button type="button" class="btn btn-sm btn-post flex-fill">
+                <i class="fas fa-newspaper icon-left"></i>
+                Attach News Article
+              </button>|
+              <button type="button" class="btn btn-sm btn-post flex-fill">
+                <i class="fas fa-images icon-left"></i>
+                Add Image/Video
+              </button>
+            </div>
+            {{ form.submit(class="btn btn-grad mb-1") }}
+          </form>
+        </div>
+      </div>
+    </div>
+
+	</div>
+{% endblock %}
