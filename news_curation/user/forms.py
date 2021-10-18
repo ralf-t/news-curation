@@ -8,15 +8,15 @@ class RegistrationForm(FlaskForm):
 		validators=[
 			DataRequired(), 
 			Length(min=2, max=15), 
-			# Regexp('^([A-Z][a-z]+([ ]?[a-z]?[\'-]?[A-Z][a-z]+)*)$', message='First name cannot contain special characters.')
-			Regexp('^([A-Z]*[a-z]+([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='First name cannot contain numbers and special characters.')
+			# Regexp('^([A-Z]*[a-z]+([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='First name cannot contain numbers and special characters.')
+			Regexp('^([A-Z]*[a-z]*([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='First name cannot contain numbers and special characters.')
 		], 
 		render_kw={"placeholder": "First Name*"})
 	
 	last_name = StringField('Last Name', validators=[
 			DataRequired(), 
 			Length(min=2, max=15),
-			Regexp('^([A-Z]*[a-z]+([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='Last name cannot contain numbers and special characters.')
+			Regexp('^([A-Z]*[a-z]*([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='Last name cannot contain numbers and special characters.')
 		], 
 		render_kw={"placeholder": "Last Name*"})
 	

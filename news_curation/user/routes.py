@@ -1,5 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from flask_login import current_user, login_user, logout_user, login_required
+from sqlalchemy import desc
 
 from news_curation.extensions import bcrypt, db
 
@@ -12,18 +13,28 @@ from news_curation.topic.models import Topic, topics
 
 
 @bp.route("/")
+@bp.route("/home")
 def home():
 
     # can be also done using only one if and return
 
     if current_user.is_authenticated: #posts are only filtered for logged-in users; anonymouse users see all posts
         # join all tables then filter posts by the interests of current user
-        posts = Post.query.join(topics, Post.id == topics.c.post_id).join(user_interests, topics.c.topic_id == user_interests.c.topic_id).filter_by(user_id=current_user.id)
-
-        return render_template('user/home.html', posts=posts)
+        user = User.query.filter_by(id=current_user.id).first()
+        
+        # for checking if a user has selected topics of interest
+        ctr = 0
+        for interest in user.topics_of_interest:
+            ctr += 1
+        
+        if ctr >= 1:
+            posts = Post.query.join(topics, Post.id == topics.c.post_id).join(user_interests, topics.c.topic_id == user_interests.c.topic_id).filter_by(user_id=current_user.id).order_by(desc(Post.created_at))
+        else:
+            posts = Post.query.order_by(desc(Post.created_at)).all()
     else:
-        posts = Post.query.all()
-        return render_template('user/home.html', posts=posts)
+        posts = Post.query.order_by(desc(Post.created_at)).all()
+    
+    return render_template('user/home.html', posts=posts)
 
 @bp.route("/register", methods=['GET', 'POST'])
 def register():
