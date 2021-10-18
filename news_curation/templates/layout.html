@@ -62,7 +62,7 @@
 	</nav>
 
 	<!--Header Image-->
-    <img src="../static/header.png" class="{% block header_class %}header-lg{% endblock %}">
+    <img src="{{ url_for('static', filename='header.png') }}" class="{% block header_class %}header-lg{% endblock %}">
 
 
 	<div class="container">

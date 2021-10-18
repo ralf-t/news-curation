@@ -86,4 +86,5 @@ def logout():
 @bp.route("/profile")
 @login_required     #prevents anonymous user from going to profile page
 def profile():
-    return render_template('user/profile.html')
+    user_posts = Post.query.filter_by(user_id=current_user.id).all()
+    return render_template('user/profile.html', user_posts=user_posts)
