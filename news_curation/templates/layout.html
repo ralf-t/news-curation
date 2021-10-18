@@ -67,7 +67,11 @@
 
 	<div class="container">
 		{% with messages = get_flashed_messages(with_categories=true) %}
-			{% if messages %}
+			{% if request.args['meld_mssg'] %}
+				<div class="alert alert-{{ request.args['meld_categ'] }}">
+					{{ request.args['meld_mssg'] }}
+				</div>
+			{% elif messages %}
 				{% for category, message in messages %}
 					<div class="alert alert-{{ category }}">
 						{{ message }}

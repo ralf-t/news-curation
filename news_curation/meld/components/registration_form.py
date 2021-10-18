@@ -1,5 +1,5 @@
 from flask_meld.component import Component
-from flask import redirect, url_for, request, flash
+from flask import redirect, url_for, request
 
 from news_curation.user.forms import RegistrationForm as Form
 from news_curation.extensions import bcrypt, db
@@ -31,5 +31,6 @@ class RegistrationForm(Component):
             db.session.add(user)
             db.session.commit()
 
-            flash('Your account has been created!', 'success')
-            return redirect(url_for('user.login'))
+            message = 'Your account has been created!'
+            category = 'success'
+            return redirect(url_for('user.login', meld_mssg=message, meld_categ=category))
