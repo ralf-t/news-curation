@@ -8,7 +8,8 @@ from news_curation import (
 	settings, 
 	post, 
 	user, 
-	topic
+	topic,
+	comment
 	)
 
 from news_curation.extensions import (
@@ -49,6 +50,7 @@ def register_blueprints(app):
 	app.register_blueprint(user.bp, url_prefix="/user")
 	app.register_blueprint(post.bp, url_prefix="/post")
 	app.register_blueprint(topic.bp, url_prefix="/topic")
+	app.register_blueprint(comment.bp, url_prefix="/comment")
 	return None
 
 def register_commands(app):

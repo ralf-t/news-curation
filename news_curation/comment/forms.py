@@ -1,11 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import TextAreaField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError
 import random
 
 class CommentForm(FlaskForm):
-	content = StringField('Username', validators=[DataRequired(), Length(min=1)])
-	submit = SubmitField('Submit')
+	content = TextAreaField('Content', validators=[DataRequired(), Length(min=1)])
+	submit = SubmitField('Comment')
 
 	# validation for duplicate username/email
 	def validate_content(self, comment):
