@@ -1,12 +1,9 @@
 {% extends "layout.html" %}
-
 {% block header_class %}
 <!-- classname for small header -->
   header
 {% endblock %}
-
 {% block content %}
-<h1>Welcome {{ current_user.username }}</h1>
 <div>
 {% for post in user_posts %}
 <a href="{{ url_for('post.post', post_id=post.id) }}">
