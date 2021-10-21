@@ -8,33 +8,41 @@ class RegistrationForm(FlaskForm):
 		validators=[
 			DataRequired(), 
 			Length(min=2, max=15), 
-			# Regexp('^([A-Z][a-z]+([ ]?[a-z]?[\'-]?[A-Z][a-z]+)*)$', message='First name cannot contain special characters.')
-			Regexp('^([A-Z]*[a-z]+([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='First name cannot contain numbers and special characters.')
+			# Regexp('^([A-Z]*[a-z]+([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='First name cannot contain numbers and special characters.')
+			Regexp('^([A-Z]*[a-z]*([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='First name cannot contain numbers and special characters.')
 		], 
-		render_kw={"placeholder": "First Name*"})
+		render_kw={"placeholder": "First Name*",
+					"meld:model.lazy": "first_name"})
 	
 	last_name = StringField('Last Name', validators=[
 			DataRequired(), 
 			Length(min=2, max=15),
-			Regexp('^([A-Z]*[a-z]+([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='Last name cannot contain numbers and special characters.')
+			Regexp('^([A-Z]*[a-z]*([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='Last name cannot contain numbers and special characters.')
 		], 
-		render_kw={"placeholder": "Last Name*"})
+		render_kw={"placeholder": "Last Name*",
+					"meld:model.lazy": "last_name"})
 	
 	username = StringField('Username', validators=[
 			DataRequired(), 
-			Length(min=2, max=20),
+			Length(min=2, max=20, message='Username should be between 2 and 20 characters long.'),
 			Regexp('^[A-Z0-9a-z\-._]+$', message='Username should only contain letters, numbers, dashes, periods, and underscores.')
 		], 
-		render_kw={"placeholder": "Username*"})
+		render_kw={"placeholder": "Username*",
+					"meld:model.lazy": "username"})
 	
 	email = StringField('Email', validators=[
 			DataRequired(), 
 			Email()
 		], 
-		render_kw={"placeholder": "Email*"})
+		render_kw={"placeholder": "Email*",
+					"meld:model.lazy": "email"})
 
-	password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "Password*"})
-	confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')], render_kw={"placeholder": "Confirm Password*"})
+	password = PasswordField('Password', validators=[DataRequired()], 
+		render_kw={"placeholder": "Password*",
+					"meld:model.lazy": "password"})
+	confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')], 
+		render_kw={"placeholder": "Confirm Password*",
+					"meld:model.lazy": "confirm_password"})
 
 	submit = SubmitField('Register')
 

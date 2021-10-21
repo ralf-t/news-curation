@@ -160,5 +160,5 @@ def delete_post(post_id):
     db.session.delete(post)
     db.session.commit()
     flash('Post has been deleted!', 'success')
-    return redirect(url_for('user.home'))
+    return redirect(url_for('user.profile'))
 

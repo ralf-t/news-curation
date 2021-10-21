@@ -4,8 +4,14 @@ LEFT AT: factories -> user, models
 
 
 ================================================================================
-SEPT 27-OCT 1 PLANS:
+OCT 11-15 PLANS:
 
+OCT 4-8 PLANS:
+- write initial test cases for registration and home page 
+
+SEPT 27-OCT 1 PLANS:
+- test finished modules
+- add validation methods to forms and models 
 
 SEPT 20-24 PLANS:
 - continue writing login tests

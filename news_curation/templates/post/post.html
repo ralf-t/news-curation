@@ -14,12 +14,6 @@
 {% block content %}
   <div class="content-container mx-auto p-5 shadow-sm">
   <article class="p-5 mb-4 rounded shadow-sm">
-    {% if post.author == current_user %}
-      <div>
-        <a href="{{ url_for('post.update_post', post_id=post.id) }}" class="btn btn-secondary btn-sm m-1">Update</a>
-        <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-      </div>
-    {% endif %}
     <div class="media">
       <!--post header-->
       <div class="d-flex align-items-center">
@@ -30,16 +24,21 @@
           <h3 class="mt-0">{{ post.author.username }}</h3>
           <small>{{ post.created_at.strftime("%Y-%m-%d %H:%M") }}</small>
         </div>
-        <!--save button-->
-        <div class="ms-auto">
-          <button type="button" class="btn btn-icon">
-            <i class="fas fa-star icon-left"></i>
-            <span>Save</span>
+
+        <!--dropdown menu-->
+        <div class="dropdown ms-auto">
+          <button class="btn btn-icon dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-v"></i>
           </button>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu">
+            <button class="dropdown-item" type="button"><i class="fas fa-star icon-left me-2"></i>Save</button>
+            {% if post.author == current_user %}
+            <a class="dropdown-item" href="{{ url_for('post.update_post', post_id=post.id) }}"><i class="fas fa-edit icon-left me-2"></i>Update</a>
+            <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fas fa-trash-alt icon-left me-2"></i>&nbsp;Delete</button>
+            {% endif %}
+          </div>
         </div>
       </div>
-
-
       <!--post content-->        
       <div class="media-body mt-3"> 
         <!--title-->

@@ -1,0 +1,32 @@
+{% macro field(fieldname, fa_icon="user", form=None) %}
+    {% set fieldnames = {
+        "first_name": form.first_name,
+        "last_name": form.last_name,
+        "username": form.username,
+        "email": form.email,
+        "password": form.password,
+        "confirm_password": form.confirm_password,
+    } %}
+
+    {% set form_field = fieldnames[fieldname] %}
+
+    {% set placeholder = ' '.join(fieldname.split('_')).title() + '*' %}
+
+    {% if form %}
+        <div class="input-group mb-2">
+            <span class="input-group-text"><i class="fas fa-{{fa_icon}}"></i></span>
+            <!-- displaying error for invalid input -->
+            {% if form_field.errors %}
+                {{ form_field(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form_field.errors %}
+                        <span>{{ error }}</form_fieldspan><br>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form_field(class="form-control input-field") }}
+            {% endif %}
+            <!-- displaying error for invalid input -->
+        </div>
+    {% endif %}
+{% endmacro %}

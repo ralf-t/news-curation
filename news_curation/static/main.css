@@ -104,7 +104,7 @@ h5 {
 
 .input-container {
     margin: auto;
-    width: 300px;
+    width: 310px;
 }
 
 .highlight {
@@ -311,6 +311,18 @@ a {
 
 a.comment {
     color: #919191 !important;
+}
+
+.dropdown-toggle::after {
+    content: none;
+}
+
+.dropdown-item {
+    color: #919191;
+}
+
+.dropdown-item:active {
+    background-color: #26a0da;
 }
 
 /*for mobile phone*/
