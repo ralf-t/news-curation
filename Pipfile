@@ -19,6 +19,10 @@ factory-boy = "*"
 flask-wtf = "*"
 email-validator = "*"
 flask-meld = {editable = true, git = "https://github.com/Iionsroar/Flask-Meld.git"}
+scikit-learn = "*"
+joblib = "*"
+pandas = "*"
+numpy = "*"
 
 [dev-packages]
 
