@@ -19,6 +19,7 @@ factory-boy = "*"
 flask-wtf = "*"
 email-validator = "*"
 flask-meld = {editable = true, git = "https://github.com/Iionsroar/Flask-Meld.git"}
+pillow = "*"
 
 [dev-packages]
 
