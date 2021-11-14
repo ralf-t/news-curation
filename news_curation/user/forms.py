@@ -11,7 +11,8 @@ class RegistrationForm(FlaskForm):
 			DataRequired(), 
 			Length(min=2, max=15), 
 			# Regexp('^([A-Z]*[a-z]+([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='First name cannot contain numbers and special characters.')
-			Regexp('^([A-Z]*[a-z]*([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='First name cannot contain numbers and special characters.')
+			# Regexp('^([A-Z]*[a-z]*([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='First name cannot contain numbers and special characters.')
+			Regexp('^[A-Z0-9a-z\-\']+$', message='First name cannot contain numbers and special characters.')
 		], 
 		render_kw={"placeholder": "First Name*",
 					"meld:model.lazy": "first_name"})
@@ -19,7 +20,8 @@ class RegistrationForm(FlaskForm):
 	last_name = StringField('Last Name', validators=[
 			DataRequired(), 
 			Length(min=2, max=15),
-			Regexp('^([A-Z]*[a-z]*([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='Last name cannot contain numbers and special characters.')
+			# Regexp('^([A-Z]*[a-z]*([ ]?[A-Za-z]*[\'-]?[A-Za-z]*)*.?)$', message='Last name cannot contain numbers and special characters.')
+			Regexp('^[A-Z0-9a-z\-\']+$', message='Last name cannot contain numbers and special characters.')
 		], 
 		render_kw={"placeholder": "Last Name*",
 					"meld:model.lazy": "last_name"})

@@ -46,8 +46,8 @@
 
             <!-- CONTENT -->
             {% if form.content.errors %}
-              {{ form.content(class="form-control is-invalid post rounded p-2 mb-4") }}
-              <div class="invalid-feedback">
+              {{ form.content(class="form-control is-invalid post rounded p-2 mb-1") }}
+              <div class="invalid-feedback mb-4">
                 {% for error in form.content.errors %}
                   <span>{{ error }}</span>
                 {% endfor %}
