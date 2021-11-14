@@ -7,6 +7,7 @@ from news_curation.extensions import db
 topics = db.Table('topics',
         db.Column('topic_id', db.Integer, db.ForeignKey('topic.id')),
         db.Column('post_id', db.Integer, db.ForeignKey('post.id'))
+        # db.UniqueConstraint('topic_id','post_id',name='UC_topic_id_post_id')
         )
 
 class Topic(db.Model):

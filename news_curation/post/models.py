@@ -12,7 +12,7 @@ class Post(db.Model):
 
     #use the author attribute to access post author details
 
-    comments = db.relationship('Comment', backref='post', lazy=True)
+    comments = db.relationship('Comment', backref='post', lazy=True, cascade = "all,delete")
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.created_at}')"

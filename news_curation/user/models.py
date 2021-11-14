@@ -4,6 +4,8 @@ from datetime import datetime
 from news_curation.extensions import db, login_manager
 from flask_login import UserMixin
 
+
+
 # for login
 @login_manager.user_loader
 def load_user(user_id):
@@ -12,12 +14,14 @@ def load_user(user_id):
 # relationship tables
 user_interests = db.Table('user_interests',
                 db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
-                db.Column('topic_id', db.Integer, db.ForeignKey('topic.id'))
+                db.Column('topic_id', db.Integer, db.ForeignKey('topic.id')),
+                db.UniqueConstraint('user_id','topic_id',name='UC_user_id_topic_id')
             )
 
 saves = db.Table('saves',
         db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
-        db.Column('post_id', db.Integer, db.ForeignKey('post.id'))
+        db.Column('post_id', db.Integer, db.ForeignKey('post.id')),
+        db.UniqueConstraint('user_id','post_id',name='UC_user_id_post_id')
         )
 
 class User(db.Model, UserMixin):
@@ -40,10 +44,9 @@ class User(db.Model, UserMixin):
         saved_posts = db.relationship('Post', secondary=saves,
                             backref=db.backref('saved_by'), lazy='dynamic')
 
-        authored_posts = db.relationship('Post', backref='author', lazy=True)
+        authored_posts = db.relationship('Post', backref='author', lazy=True, cascade = "all,delete")
 
-        comments = db.relationship('Comment', backref='author', lazy=True)
+        comments = db.relationship('Comment', backref='author', lazy=True, cascade = "all,delete")
 
         def __repr__(self):     #what will be printed out when we print this model
             return f"User('{self.first_name} {self.last_name}', '{self.username}', '{self.email}', '{self.profile_picture}')"
-
