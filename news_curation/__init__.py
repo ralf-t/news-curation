@@ -16,8 +16,11 @@ from news_curation.extensions import (
 	db,
 	login_manager,
 	bcrypt,
-	meld
+	meld,
+	admin
 	)
+
+from flask_admin.contrib.sqla import ModelView
 
 FLASK_ENV = environ['FLASK_ENV']
 
@@ -38,6 +41,12 @@ def create_app(test_config=None):
 	register_extensions(app)
 	register_blueprints(app)
 	register_commands(app)
+	add_view(
+		topic.models.Topic,
+		user.models.User,
+		post.models.Post,
+		comment.models.Comment
+	)
 
 	return app
 
@@ -46,6 +55,7 @@ def register_extensions(app):
 	login_manager.init_app(app)
 	bcrypt.init_app(app)
 	meld.init_app(app)
+	admin.init_app(app)
 	return None
 
 def register_blueprints(app):
@@ -59,3 +69,8 @@ def register_commands(app):
 	app.cli.add_command(commands.up)
 	app.cli.add_command(commands.seeder_cli)
 	return None
+
+def add_view(*args):
+	for arg in args:
+		# set model's name as url
+		admin.add_view(ModelView(arg, db.session, endpoint=arg.__name__))
