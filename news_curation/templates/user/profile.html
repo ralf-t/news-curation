@@ -5,124 +5,179 @@
 {% endblock %}
 
 {% block content %}
+<!--profile details-->
+<div class="content-container mx-auto my-md-5 my-sm-0 p-5 shadow-sm">
+  <div class="d-flex align-items-center w-100">
+    <!--image-->
+    <div class="profile-img-container me-4">
+      <img class="profile-img shadow-sm" src="{{ url_for('static', filename='profile_pics/' + current_user.profile_picture) }}" alt="Generic placeholder image"> 
+    </div>
+    <!--details-->
+    <div class="w-100">
+      <h3>{{ current_user.username }}</h3>
+      <small>{{ current_user.email }}</small>
+      <div class="row mt-3">
+        <div class="col"><p><strong class="highlight">{{ user_posts|length }}&nbsp;</strong>{{ 'Posts' if user_posts|length>1 else 'Post' }}</p></div>
+        <div class="col"><p><strong class="highlight">46&nbsp;</strong>Comments</p></div>
+      </div>
+      <div class="d-flex">
+        <button type="button" name="button" class="btn btn-grad" data-bs-toggle="modal" data-bs-target="#profileModal">Update Profile</button>
+      </div>
+    </div>
+  </div> 
+</div>
 <div>
-	<div class="media">
-    	<img class="rounded-circle account-img" src="{{ image_file }}">
-    	<div class="media-body">
-    	  	<h2 class="account-heading">{{ current_user.username }}</h2>
-      		<p class="text-secondary">{{ current_user.email }}</p>
-    	</div>
-  	</div>
-  <!--------------------- MODAL ------------------------->
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateProfile">
-    Update Profile
-  </button>
 
-  <!-- Modal -->
-  {% if not error %}
-  <div class="modal fade" id="updateProfile" tabindex="-1" aria-labelledby="updateProfileLabel" aria-hidden="true">
-  {% else %}
-  <div class="modal" id="updateProfile" tabindex="-1" aria-labelledby="updateProfileLabel" aria-hidden="true">
- 	{% endif %}
-    <form action="" method="POST" enctype="multipart/form-data"> <!-- enctype... allows form to pass image data properly -->
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="updateProfileLabel">Edit Profile</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-              {{ form.hidden_tag() }}
-              <fieldset class="form-group">
-                <div class="form-group">
-                  {{ form.username.label(class="form-control-label") }}
-                  <!-- displaying error for invalid input -->
-                  {% if form.username.errors %}
-                    {{ form.username(class="form-control is-invalid") }}
-                    <div class="invalid-feedback">
-                      {% for error in form.username.errors %}
-                        <span>{{ error }}</span>
-                      {% endfor %}
-                    </div>
-                  {% else %}
-                    {{ form.username(class="form-control form-control") }}
-                  {% endif %}
-                  <!-- displaying error for invalid input -->
-                  
-                </div>
-                <div class="form-group">
-                  {{ form.email.label(class="form-control-label") }}
-                  <!-- displaying error for invalid input -->
-                  {% if form.email.errors %}
-                    {{ form.email(class="form-control is-invalid") }}
-                    <div class="invalid-feedback">
-                      {% for error in form.email.errors %}
-                        <span>{{ error }}</span>
-                      {% endfor %}
-                    </div>
-                  {% else %}
-                    {{ form.email(class="form-control form-control") }}
-                  {% endif %}
-                  <!-- displaying error for invalid input -->
-                </div>
-                <label for="password">Password</label>
-                <a data-bs-toggle="collapse" href="#change-password" role="button" aria-expanded="false" aria-controls="change-password">Change</a>
-                {% if passwordError %}
-                <div class="collapse show" id="change-password">
-                {% else %}
-                <div class="collapse" id="change-password">
-                {% endif %}
-                	<div class="form-group">
-                	  <!-- displaying error for invalid input -->
-                	  {% if form.password.errors %}
-                	    {{ form.password(class="form-control is-invalid") }}
-                	    <div class="invalid-feedback">
-                	      {% for error in form.password.errors %}
-                	        <span>{{ error }}</span>
-                	      {% endfor %}
-                	    </div>
-                	  {% else %}
-                	    {{ form.password(class="form-control form-control") }}
-                	  {% endif %}
-                	  <!-- displaying error for invalid input -->
-                	</div>
-                	<div class="form-group">
-                	  <!-- displaying error for invalid input -->
-                	  {% if form.confirm_password.errors %}
-                	    {{ form.confirm_password(class="form-control is-invalid") }}
-                	    <div class="invalid-feedback">
-                	      {% for error in form.confirm_password.errors %}
-                	        <span>{{ error }}</span>
-                	      {% endfor %}
-                	    </div>
-                	  {% else %}
-                	    {{ form.confirm_password(class="form-control form-control") }}
-                	  {% endif %}
-                	  <!-- displaying error for invalid input -->
-                	</div>
-                </div>
-                <div class="form-group">
-                	{{ form.picture.label() }}<br>
-                	{{ form.picture(class="form-control-file") }}
-                	{% if form.picture.errors %}
-                		{% for error in form.picture.errors %}
-                			<span class="text-danger">{{ error }}</span><br>
-                		{% endfor %}
-                	{% endif %}
-                </div>
-              </fieldset>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-         	{{ form.submit(class="btn btn-outline-info") }}
+
+<!--Modal-->
+{% if not error %}
+<div class="modal fade" id="profileModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="profileModal" aria-hidden="true">
+{% else %}
+<div class="modal" id="profileModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="profileModal" aria-hidden="true">
+{% endif %}
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="profileModalLabel">Update Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-container mb-4">
+          <!-- <form class="w-100"> -->
+          <form class="w-100" method="POST" enctype="multipart/form-data">
+          {{ form.hidden_tag() }}
+            <div class="profile-img-container mx-auto mb-3">
+              <img class="profile-img shadow-sm" src="{{ image_file }}" alt="Generic placeholder image"> 
+              <button type="button" name="button" class="btn btn-upload shadow-sm" title="Upload Photo" data-bs-toggle="collapse" href="#change-picture" role="button" aria-expanded="false" aria-controls="change-picture"><i class="fas fa-upload"></i></button>
+            </div>
+            <!-- Change Picture collapse -->
+            {% if form.picture.errors %}
+            <div class="collapse show mt-0 mb-4" id="change-picture">
+            {% else %}
+            <div class="collapse mt-0 mb-4" id="change-picture">
+            {% endif %}
+	            <div class="form-group">
+	            	{{ form.picture.label() }}<br>
+	            	{{ form.picture(class="form-control-file") }}
+	            	{% if form.picture.errors %}
+	            		{% for error in form.picture.errors %}
+	            			<br><span class="text-danger">{{ error }}</span><br>
+	            		{% endfor %}
+	            	{% endif %}
+	            </div>
+	          </div>
+
+
+            <!-------- First Name -------->
+            <div class="input-group mb-3">
+            	<span class="input-group-text"><i class="fas fa-user"></i></span>
+            	{% if form.first_name.errors %}
+              {{ form.first_name(class="form-control input-field is-invalid") }}
+              <div class="invalid-feedback">
+              	{% for error in form.first_name.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            	{% else %}
+              {{ form.first_name(class="form-control input-field") }}
+            	{% endif %}
+            </div>
+
+            <!------- Last Name --------->
+            <div class="input-group mb-3">
+            	<span class="input-group-text"><i class="fas fa-user"></i></span>
+            	{% if form.last_name.errors %}
+              {{ form.last_name(class="form-control input-field is-invalid") }}
+              <div class="invalid-feedback">
+              	{% for error in form.last_name.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            	{% else %}
+              {{ form.last_name(class="form-control input-field") }}
+            	{% endif %}
+            </div>
+
+            <!------- Username --------->
+            <div class="input-group mb-3">
+            	<span class="input-group-text"><i class="fas fa-user"></i></span>
+            	{% if form.username.errors %}
+              {{ form.username(class="form-control input-field is-invalid") }}
+              <div class="invalid-feedback">
+              	{% for error in form.username.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            	{% else %}
+              {{ form.username(class="form-control input-field") }}
+            	{% endif %}
+            </div>
+
+            <!------- Email --------->
+            <div class="input-group mb-3">
+            	<span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            	{% if form.email.errors %}
+              {{ form.email(class="form-control input-field is-invalid") }}
+              <div class="invalid-feedback">
+              	{% for error in form.email.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            	{% else %}
+              {{ form.email(class="form-control input-field") }}
+            	{% endif %}
+            </div>
+
+            <!--------- Change Password --------->
+            <label for="password">Password</label>
+
+            <!-- Password collapse -->
+            <a data-bs-toggle="collapse" href="#change-password" role="button" aria-expanded="false" aria-controls="change-password">Change</a>
+            {% if form.password.errors or form.confirm_password.errors %}
+            <div class="collapse show" id="change-password">
+            {% else %}
+            <div class="collapse" id="change-password">
+            {% endif %}
+            	<div class="input-group mb-3">
+            	<span class="input-group-text"><i class="fas fa-key"></i></span>
+            	  {% if form.password.errors %}
+            	  {{ form.password(class="form-control input-field is-invalid") }}
+            	  <div class="invalid-feedback">
+            	    {% for error in form.password.errors %}
+            	      <span>{{ error }}</span>
+            	    {% endfor %}
+            	  </div>
+            	  {% else %}
+            	  {{ form.password(class="form-control input-field") }}
+            	  {% endif %}
+            	</div>
+            	<div class="input-group mb-3">
+            		<span class="input-group-text"><i class="fas fa-key"></i></span>
+            	  {% if form.confirm_password.errors %}
+            	  {{ form.confirm_password(class="form-control input-field is-invalid") }}
+            	  <div class="invalid-feedback">
+            	    {% for error in form.confirm_password.errors %}
+            	      <span>{{ error }}</span>
+            	    {% endfor %}
+            	  </div>
+            	  {% else %}
+            	  {{ form.confirm_password(class="form-control input-field") }}
+            	  {% endif %}
+            	</div>
+            </div>
+
+            <div class="d-flex justify-content-center mt-4 login_container">
+                {{ form.submit(class="btn btn-grad") }}
+            </div>
+          </form>
         </div>
       </div>
     </div>
-    </form>
   </div>
-<!------------------ END OF MODAL ------------------->
+</div>
 
+<!-- Posts -->
+<div class="content-container mx-auto p-5 shadow-sm">
 {% for post in user_posts %}
 <a href="{{ url_for('post.post', post_id=post.id) }}">
 <article class="media content-section p-5 mb-4 rounded shadow-sm">
@@ -196,8 +251,8 @@
 {% block scripts %}
 <script>
 {% if error %}
-var updateProfile = new bootstrap.Modal(document.getElementById('updateProfile'), {})
-updateProfile.toggle()
+var profileModal = new bootstrap.Modal(document.getElementById('profileModal'), {})
+profileModal.toggle()
 {% endif %}
 </script>
 {% endblock %}
