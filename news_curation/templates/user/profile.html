@@ -4,7 +4,78 @@
   header
 {% endblock %}
 {% block content %}
+<!--profile details-->
+<div class="content-container mx-auto my-md-5 my-sm-0 p-5 shadow-sm">
+  <div class="d-flex align-items-center w-100">
+    <!--image-->
+    <div class="profile-img-container me-4">
+      <img src="{{ url_for('static', filename='default.jpg') }}" class="profile-img shadow-sm" alt="Generic placeholder image">
+    </div>
+    <!--details-->
+    <div class="w-100">
+      <h3>Kang Seulgi</h3>
+      <small>irenebae@gmail.com</small>
+      <div class="row mt-3">
+        <div class="col"><p><strong class="highlight">12&nbsp;</strong>Posts</p></div>
+        <div class="col"><p><strong class="highlight">46&nbsp;</strong>Comments</p></div>
+      </div>
+      <div class="d-flex">
+        <button type="button" name="button" class="btn btn-grad" data-bs-toggle="modal" data-bs-target="#profileModal">Update Profile</button>
+      </div>
+    </div>
+  </div> 
+</div>
 <div>
+
+<!--Modal-->
+<div class="modal fade" id="profileModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="profileModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-container mb-4">
+          <form class="w-100">
+            <div class="profile-img-container mx-auto mb-3">
+              <img src="{{ url_for('static', filename='default.jpg') }}" class="profile-img shadow-sm">
+              <button type="button" name="button" class="btn btn-upload shadow-sm" title="Upload Photo"><i class="fas fa-upload"></i></button>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+              <input type="text" name="" class="form-control input-field" value="Seulgi" placeholder="First Name*">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+              <input type="text" name="" class="form-control input-field" value="Kang" placeholder="Last Name*">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+              <input type="text" name="" class="form-control input-field" value="Kang Seulgi" placeholder="Username*">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                <input type="text" name="" class="form-control input-field" value="irene_bae@gmail.com" placeholder="Email*">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                <input type="password" name="" class="form-control input-field" value="" placeholder="Password*">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fas fa-key"></i></span>
+              <input type="password" name="" class="form-control input-field" value="" placeholder="Confirm Password*">
+            </div>
+            <div class="d-flex justify-content-center mt-4 login_container">
+                <button type="button" name="button" class="btn btn-grad">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content-container mx-auto p-5 shadow-sm">
 {% for post in user_posts %}
 <a href="{{ url_for('post.post', post_id=post.id) }}">
 <article class="media content-section p-5 mb-4 rounded shadow-sm">
