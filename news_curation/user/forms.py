@@ -71,8 +71,18 @@ class LoginForm(FlaskForm):
 	submit = SubmitField('Login')
 
 class UpdateProfileForm(FlaskForm):
-	username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
-	email = StringField('Email', validators=[DataRequired(), Email()])
+	first_name = StringField('First Name', validators=[DataRequired(), Length(min=2, max=20)],
+		render_kw={"placeholder": "First Name",
+					"meld:model.lazy": "first_name"})
+	last_name = StringField('Last Name', validators=[DataRequired(), Length(min=2, max=20)],
+		render_kw={"placeholder": "Last Name",
+					"meld:model.lazy": "last_name"})
+	username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)],
+		render_kw={"placeholder": "Username",
+					"meld:model.lazy": "username"})
+	email = StringField('Email', validators=[DataRequired(), Email()],
+		render_kw={"placeholder": "Email",
+					"meld:model.lazy": "email"})
 	picture = FileField('Change Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
 	password = PasswordField('New Password', validators=[], 
 		render_kw={"placeholder": "New Password",

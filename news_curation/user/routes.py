@@ -107,7 +107,7 @@ def save_picture(form_picture):
     picture_fn = random_hex + f_ext #this will be the filename of picture when saved    
     picture_path = os.path.join(current_app.root_path, 'static/profile_pics', picture_fn)
     
-    output_size = (125, 125)
+    output_size = (500, 500)
     i = Image.open(form_picture)
     i.thumbnail(output_size)
 
@@ -121,8 +121,7 @@ def profile():
     user_posts = Post.query.filter_by(user_id=current_user.id).all()
     form = UpdateProfileForm()
     error = False
-    passwordError = False
-
+        
     if form.validate_on_submit():
         if form.picture.data:   #if a picture was uploaded
             picture_file = save_picture(form.picture.data)
@@ -131,20 +130,21 @@ def profile():
             hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
             current_user.password = hashed_password
 
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.last_name.data
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
         flash('Profile successfully updated!', 'success')
         return redirect(url_for('user.profile'))
     elif request.method == 'GET':
+        form.first_name.data = current_user.first_name
+        form.last_name.data = current_user.last_name
         form.username.data = current_user.username
         form.email.data = current_user.email
     else:
-        for fieldName, errorMessages in form.errors.items():
-            if errorMessages:
-                passwordError = True
         error = True
+
     image_file = url_for('static', filename='profile_pics/' + current_user.profile_picture)
     return render_template('user/profile.html', user_posts=user_posts, 
-                            form=form, error=error, 
-                            passwordError=passwordError, image_file=image_file)
+                            form=form, error=error, image_file=image_file)
