@@ -24,6 +24,7 @@ joblib = "*"
 pandas = "*"
 numpy = "*"
 flask-admin = "*"
+pillow = "*"
 
 [dev-packages]
 
