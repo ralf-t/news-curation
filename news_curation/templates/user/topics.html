@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block style %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+{% endblock %}
+
+{% block title %}Home{% endblock %}
+
+{% block header_class %}
+<!-- classname for small header -->
+	header
+{% endblock %}
+{% block content %}
+<div class="content-container mx-auto p-5 shadow-sm">
+  <h1 class="mt-5">Topics of Interest</h1>
+
+  <div class="input-group rounded my-4">
+    <input type="search" class="form-control input-field rounded" placeholder="Search Topics" aria-label="Search"
+      aria-describedby="search-addon" />
+    <button type="button" class="btn btn-secondary">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+  
+  <p class="my-5">Select topics of interest below:</p>
+  
+  <div class="d-flex flex-wrap justify-content-between button-container">
+    <div class="topic-select">
+      <label class="w-100">
+        <input type="checkbox">
+        <span>Business</span>
+      </label>
+    </div>
+    <div class="topic-select">
+      <label class="w-100">
+        <input type="checkbox">
+        <span>Arts</span>
+      </label>
+    </div>
+  </div>
+  
+</div>
+{% endblock %}

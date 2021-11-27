@@ -325,14 +325,55 @@ a.comment {
     background-color: #26a0da;
 }
 
+.topic-select label input[type="checkbox"] {
+    display: none;
+}
+
+.topic-select {
+    width: 48%;
+}
+
+.topic-select label span {
+    padding: 10px 20px;
+    width: 100%;
+    margin-bottom: 25px;
+    text-align: left;
+    font-weight: 700;
+    color: #314755;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 50px;
+    display: block;
+    border: solid 3px transparent;
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(101deg, #314755, #26a0da);
+    background-origin: border-box;
+    box-shadow: 2px 1000px 1px #ffffff inset;
+    user-select: none;
+    cursor: pointer;
+}
+
+.topic-select label input[type="checkbox"]:checked ~ span{
+    box-shadow: 2px 1000px 1px #ffffff;
+    color: #ffffff;
+}
+
+.input-group, .form-control {
+    position: static !important;
+}
+
 /*for mobile phone*/
 @media only screen and (max-width: 768px) {
     .content-container, .login-container{
         width: 100%;
     }
+    
     .btn-topic {
         width: 100%;
     }
+
+    .topic-select {
+        width: 100%;
+    }
+
     .navbar-nav {
         background: rgba(170, 170, 170, 0.95);
         margin-top: 5px;
