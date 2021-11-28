@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block style %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+{% endblock %}
+
+{% block title %}Home{% endblock %}
+
+{% block header_class %}
+<!-- classname for small header -->
+	header
+{% endblock %}
+{% block content %}
+<div class="content-container mx-auto p-5 shadow-sm">
+  <h1 class="mt-5">Topics of Interest</h1>
+
+  <div class="input-group rounded my-4">
+    <form method="post" action="">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+      <input type="search" class="form-control input-field rounded" placeholder="Search Topics" aria-label="Search"
+        aria-describedby="search-addon" name="query" />
+      <button type="submit" name="search" class="btn btn-secondary" value="submit">
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+  </div>
+  
+  <p class="my-5">Select topics of interest below:</p>
+  
+
+  <form method="post" action="">
+    <div class="d-flex flex-wrap justify-content-between button-container">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+      {% for topic in topics %}
+        <div class="topic-select">
+          <label class="w-100">
+            <input type="checkbox" value="{{topic.topic}}" name="{{topic.topic}}" {{ 'checked' if topic in current_user.topics_of_interest else '' }}>
+            <span>{{topic.topic}}</span>
+          </label>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="d-grid gap-2">
+      <button class="btn btn-secondary" type="submit" name="update_topics" value="submit">Update my topics</button>
+    </div>
+  </form>
+  
+</div>
+{% endblock %}
