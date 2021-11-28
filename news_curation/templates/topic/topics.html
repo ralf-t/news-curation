@@ -12,10 +12,10 @@
 {% endblock %}
 {% block content %}
 <div class="content-container mx-auto p-5 shadow-sm">
-  <h1 class="mt-5">Topics of Interest</h1>
+  <h1>Topics of Interest</h1>
 
   <div class="input-group rounded my-4">
-    <form method="post" action="">
+    <form method="post" action="" class="d-flex w-100">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
       <input type="search" class="form-control input-field rounded" placeholder="Search Topics" aria-label="Search"
         aria-describedby="search-addon" name="query" />
