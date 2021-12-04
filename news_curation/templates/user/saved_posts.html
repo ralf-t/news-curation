@@ -12,28 +12,9 @@
 {% endblock %}
 {% block content %}
 	<div class="content-container mx-auto p-5 shadow-sm">
-    <!--create post-->
-    <div class="media px-5 py-3 mb-4 rounded shadow-sm">
-      <div class="d-flex align-items-center">
-        <!--image-->
-        <div class="me-2">
-          {% if current_user.is_authenticated %}
-          <img class="post-profile align-self-start mr-3 rounded-circle shadow-sm" src="{{ url_for('static', filename='profile_pics/' + current_user.profile_picture) }}" alt="Generic placeholder image">
-          {% else %}
-          <img class="post-profile align-self-start mr-3 rounded-circle shadow-sm" src="{{ url_for('static', filename='profile_pics/default.jpg') }}" alt="Generic placeholder image">
-          {% endif %}
-        </div>
-        <!--post bar-->
-        <form action="{{ url_for('post.new_post') }}" class="w-100">
-          <div class="my-4">
-            <input type="submit" class="btn-create-post border border-2 rounded p-2" value="Create Post"/>
-          </div>
-        </form>    
-      </div>  
-    </div>
 
 	{% for post in posts %}
-		<article id="{{ post.id }}" class="media content-section p-5 mb-4 rounded shadow-sm">
+		<article class="media content-section p-5 mb-4 rounded shadow-sm">
         <!--user image and name-->
         <div class="d-flex align-items-center">
           <!--image-->
@@ -47,9 +28,9 @@
           </div>
           <!--save-->
           <div class="ms-auto">
-            <a class="btn btn-icon" href="{{ url_for('post.save_post', post_id=post.id, home=True) }}">
-              <i class="fas fa-star icon-left"></i>
-              <span>Save</span>
+            <a class="btn btn-icon" href="{{ url_for('post.remove_saved', post_id=post.id) }}">
+              <i class="fas fa-times icon-left"></i>
+              <span>Remove</span>
             </a>
           </div>
         </div>

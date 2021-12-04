@@ -148,3 +148,10 @@ def profile():
     image_file = url_for('static', filename='profile_pics/' + current_user.profile_picture)
     return render_template('user/profile.html', user_posts=user_posts, 
                             form=form, error=error, image_file=image_file)
+
+
+@bp.route("/saved_posts")
+@login_required
+def saved_posts():
+    posts = current_user.saved_posts
+    return render_template('user/saved_posts.html', posts=posts)

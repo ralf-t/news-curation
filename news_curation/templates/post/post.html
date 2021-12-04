@@ -18,7 +18,7 @@
       <!--post header-->
       <div class="d-flex align-items-center">
         <div class="me-2">
-          <img class="post-profile align-self-start mr-3 rounded-circle shadow-sm" src="{{ url_for('static', filename='default.jpg') }}" alt="Generic placeholder image">
+          <img class="post-profile align-self-start mr-3 rounded-circle shadow-sm" src="{{ url_for('static', filename='profile_pics/' + post.author.profile_picture) }}" alt="Generic placeholder image">
         </div>
         <div>
           <h3 class="mt-0">{{ post.author.username }}</h3>
@@ -31,7 +31,7 @@
             <i class="fas fa-ellipsis-v"></i>
           </button>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu">
-            <button class="dropdown-item" type="button"><i class="fas fa-star icon-left me-2"></i>Save</button>
+            <a class="dropdown-item" type="button" href="{{ url_for('post.save_post', post_id=post.id, home='False') }}"><i class="fas fa-star icon-left me-2"></i>Save</a>
             {% if post.author == current_user %}
             <a class="dropdown-item" href="{{ url_for('post.update_post', post_id=post.id) }}"><i class="fas fa-edit icon-left me-2"></i>Update</a>
             <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fas fa-trash-alt icon-left me-2"></i>&nbsp;Delete</button>
@@ -87,6 +87,7 @@
       </div>
 
       <!--sample comment-->
+      {# <!-- Remove this line pag imemerge na -->
       {% for comment in post.comments %}
         <div class="media">
           <div class="mt-4 align-items-center">
@@ -122,6 +123,8 @@
           </div>
         </div>
       {% endfor %}
+
+      #}  <!-- Remove this line pag imemerge na -->
 
       </div>
       <!--end of sample comment-->

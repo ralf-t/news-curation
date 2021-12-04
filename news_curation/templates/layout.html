@@ -47,7 +47,9 @@
 						<!-- <li><a class="nav-item nav-link active" href="{{ url_for('user.home') }}">Home</a></li>	 -->
 						{% if current_user.is_authenticated %}
 							{{ nav_link('user.profile', 'Profile') }}
+							{{ nav_link('user.saved_posts', 'Saved Posts') }}
 							{{ nav_link('user.logout', 'Logout') }}
+
 		                    <!-- <a class="nav-item nav-link" href="{{ url_for('user.profile') }}">Profile</a> -->
 		                    <!-- <a class="nav-item nav-link" href="{{ url_for('user.logout') }}">Logout</a> -->
 		                {% else %}

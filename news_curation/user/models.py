@@ -15,6 +15,7 @@ user_interests = db.Table('user_interests',
                 db.Column('topic_id', db.Integer, db.ForeignKey('topic.id'))
             )
 
+    # for saved posts
 saves = db.Table('saves',
         db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
         db.Column('post_id', db.Integer, db.ForeignKey('post.id'))
