@@ -18,6 +18,7 @@ user_interests = db.Table('user_interests',
                 db.UniqueConstraint('user_id','topic_id',name='UC_user_id_topic_id')
             )
 
+    # for saved posts
 saves = db.Table('saves',
         db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
         db.Column('post_id', db.Integer, db.ForeignKey('post.id')),

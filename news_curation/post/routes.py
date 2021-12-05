@@ -162,3 +162,34 @@ def delete_post(post_id):
     flash('Post has been deleted!', 'success')
     return redirect(url_for('user.profile'))
 
+
+# Saving post
+@bp.route("/<int:post_id>/save")
+@login_required
+def save_post(post_id):
+	home = request.args.get('home')
+	post = Post.query.get_or_404(post_id)
+
+	if current_user in post.saved_by:	# if user has already saved the post
+	    flash('Post is already in Saved Posts', 'info')
+	else:
+	    post.saved_by.append(current_user)
+	    db.session.commit()
+	    flash('Post has been saved!', 'success')
+
+	if home == 'True': #return to homepage if saved from there
+		return redirect(url_for('user.home'))
+	else:
+		return redirect(url_for('post.post', post_id=post_id))
+
+
+# Removing saved post
+@bp.route("/<int:post_id>/remove_saved")
+@login_required
+def remove_saved(post_id):
+	post = Post.query.get_or_404(post_id)
+	post.saved_by.remove(current_user)
+	db.session.commit()
+	flash('Post has been removed from Saved Posts', 'success')
+
+	return redirect(url_for('user.saved_posts'))
