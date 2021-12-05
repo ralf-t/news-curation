@@ -17,7 +17,8 @@ from news_curation.extensions import (
 	login_manager,
 	bcrypt,
 	meld,
-	admin
+	admin,
+	csrf
 	)
 
 from flask_admin.contrib.sqla import ModelView
@@ -56,6 +57,7 @@ def register_extensions(app):
 	bcrypt.init_app(app)
 	meld.init_app(app)
 	admin.init_app(app)
+	csrf.init_app(app)
 	return None
 
 def register_blueprints(app):

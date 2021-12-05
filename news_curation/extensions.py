@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_meld import Meld
 from flask_admin import Admin
+from flask_wtf.csrf import CSRFProtect
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -14,3 +15,4 @@ login_manager.login_message_category = 'info'	#handles logged-out users from acc
 bcrypt = Bcrypt()
 meld = Meld()
 admin = Admin()
+csrf = CSRFProtect()
