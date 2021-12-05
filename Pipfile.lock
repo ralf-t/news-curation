@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d5054e42f2fef9e7b3a202d30773d1a75fc409300493bcd5bd2183857aba9f4e"
+            "sha256": "0bf0c4dad7f5c184bfea321b11edbcf28bcd2aa26337f3a85b55ad272294d1a0"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -204,7 +204,6 @@
             "version": "==0.5.0"
         },
         "flask-meld": {
-            "editable": true,
             "git": "https://github.com/Iionsroar/Flask-Meld.git",
             "ref": "19f7518942691a000883e28e2c9e792a0833d62e"
         },

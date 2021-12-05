@@ -18,13 +18,13 @@ bcrypt = "*"
 factory-boy = "*"
 flask-wtf = "*"
 email-validator = "*"
-flask-meld = {editable = true, git = "https://github.com/Iionsroar/Flask-Meld.git"}
 scikit-learn = "*"
 joblib = "*"
 pandas = "*"
 numpy = "*"
 flask-admin = "*"
 pillow = "*"
+flask-meld = {ref = "main", git = "https://github.com/Iionsroar/Flask-Meld.git"}
 
 [dev-packages]
 
