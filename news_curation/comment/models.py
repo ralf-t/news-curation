@@ -13,4 +13,4 @@ class Comment(db.Model):
     #use the author attribute to access post author details
 
     def __repr__(self):
-        return f"Post('{self.title}', '{self.created_at}')"
+        return f"Comment('{self.content}', '{self.created_at}')"
