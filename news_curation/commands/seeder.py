@@ -71,10 +71,16 @@ def setUp():
 
                 # post will have 1-5 topics
                 for j in range(random.randint(1,5)):
-                    # get a random topic
+                    
+                    # get a random topic via lambda function
                     random_topic = lambda : topics[random.randint(0, len(topics) - 1)]
                     
-                    post.topic.append(random_topic())
+                    # fetch untila different topic can be assigned
+                    topic_ = random_topic()
+                    while (topic_ in post.topic):
+                        topic_ = random_topic()
+                    
+                    post.topic.append(topic_)
                 
                 db.session.add(post)
             

@@ -1,4 +1,6 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
+from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp
 from news_curation.user.models import User
@@ -65,3 +67,38 @@ class LoginForm(FlaskForm):
 
 	remember = BooleanField('Remember Me')
 	submit = SubmitField('Login')
+
+class UpdateProfileForm(FlaskForm):
+	first_name = StringField('First Name', validators=[DataRequired(), Length(min=2, max=20)],
+		render_kw={"placeholder": "First Name",
+					"meld:model.lazy": "first_name"})
+	last_name = StringField('Last Name', validators=[DataRequired(), Length(min=2, max=20)],
+		render_kw={"placeholder": "Last Name",
+					"meld:model.lazy": "last_name"})
+	username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)],
+		render_kw={"placeholder": "Username",
+					"meld:model.lazy": "username"})
+	email = StringField('Email', validators=[DataRequired(), Email()],
+		render_kw={"placeholder": "Email",
+					"meld:model.lazy": "email"})
+	picture = FileField('Change Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+	password = PasswordField('New Password', validators=[], 
+		render_kw={"placeholder": "New Password",
+					"meld:model.lazy": "password"})
+	confirm_password = PasswordField('Confirm New Password', validators=[EqualTo('password')], 
+		render_kw={"placeholder": "Confirm New Password",
+					"meld:model.lazy": "confirm_password"})
+
+	submit = SubmitField('Save Changes')
+
+	def validate_username(self, username):
+		if username.data != current_user.username:
+			user = User.query.filter_by(username=username.data).first()
+			if user:
+				raise ValidationError('This username is taken. Please choose another one.')
+
+	def validate_email(self, email):
+		if email.data != current_user.email:
+			user = User.query.filter_by(email=email.data).first()
+			if user:
+				raise ValidationError('This email is already taken. Please choose another one.')

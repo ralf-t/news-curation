@@ -1,11 +1,17 @@
-from flask import render_template, url_for, flash, redirect, request
+#imports for profile picture
+import os
+import secrets  #for creating random hex for picture filename
+from PIL import Image  #from Pillow package
+#####
+
+from flask import render_template, url_for, flash, redirect, request, current_app
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy import desc
 
 from news_curation.extensions import bcrypt, db
 
 from news_curation.user import bp
-from news_curation.user.forms import LoginForm, RegistrationForm
+from news_curation.user.forms import LoginForm, RegistrationForm, UpdateProfileForm
 from news_curation.user.models import User, user_interests
 
 from news_curation.post.models import Post
@@ -94,8 +100,60 @@ def logout():
     logout_user()
     return redirect(url_for('user.home'))
 
-@bp.route("/profile")
+
+def save_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    f_name, f_ext = os.path.splitext(form_picture.filename) #split the picture's filename and extension
+    picture_fn = random_hex + f_ext #this will be the filename of picture when saved    
+    picture_path = os.path.join(current_app.root_path, 'static/profile_pics', picture_fn)
+    
+    output_size = (500, 500)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+
+    i.save(picture_path)
+
+    return picture_fn
+
+@bp.route("/profile", methods=['GET', 'POST'])
 @login_required     #prevents anonymous user from going to profile page
 def profile():
-    user_posts = Post.query.filter_by(user_id=current_user.id).all()
-    return render_template('user/profile.html', user_posts=user_posts)
+    # user_posts = Post.query.filter_by(user_id=current_user.id).all()
+    user_posts = Post.query.filter_by(user_id=current_user.id).order_by(desc(Post.created_at)).all() #order by latest first
+    form = UpdateProfileForm()
+    error = False
+        
+    if form.validate_on_submit():
+        if form.picture.data:   #if a picture was uploaded
+            picture_file = save_picture(form.picture.data)
+            current_user.profile_picture = picture_file     #save the picture file to database
+        if form.password.data:
+            hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+            current_user.password = hashed_password
+
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.last_name.data
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Profile successfully updated!', 'success')
+        return redirect(url_for('user.profile'))
+    elif request.method == 'GET':
+        form.first_name.data = current_user.first_name
+        form.last_name.data = current_user.last_name
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    else:
+        error = True
+
+    image_file = url_for('static', filename='profile_pics/' + current_user.profile_picture)
+    return render_template('user/profile.html', user_posts=user_posts, 
+                            form=form, error=error, image_file=image_file)
+
+#View saved posts
+@bp.route("/saved_posts")
+@login_required
+def saved_posts():
+    posts = current_user.saved_posts.order_by(desc(Post.created_at)).all()
+
+    return render_template('user/saved_posts.html', posts=posts)

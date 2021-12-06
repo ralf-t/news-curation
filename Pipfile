@@ -23,6 +23,8 @@ scikit-learn = "*"
 joblib = "*"
 pandas = "*"
 numpy = "*"
+pillow = "*"
+flask-admin = "*"
 
 [dev-packages]
 

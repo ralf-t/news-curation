@@ -24,7 +24,7 @@
       <div class="d-flex my-4">
         <!--image-->
         <div class="me-2">
-          <img class="post-profile align-self-start mr-3 rounded-circle shadow-sm" src="{{ url_for('static', filename='default.jpg') }}" alt="Generic placeholder image">
+          <img class="post-profile align-self-start mr-3 rounded-circle shadow-sm" src="{{ url_for('static', filename='profile_pics/' + current_user.profile_picture) }}" alt="Generic placeholder image">
         </div>
         <!--form-->
         <div class="w-100">
@@ -74,7 +74,7 @@
 
             <div class="d-flex flex-wrap">
               {% for tag in tags %}
-                  <input type=submit class="btn btn-sm btn-secondary m-1" name="tag_to_remove" value="{{ tag }}">
+                  <input type=submit title="Click to remove tags" class="btn btn-sm btn-tags m-1" name="tag_to_remove" value="{{ tag }}">
               {% endfor %}
             </div>
             <div class="d-flex">
