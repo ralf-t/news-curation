@@ -9,7 +9,8 @@ from news_curation import (
 	post, 
 	user, 
 	topic,
-	comment
+	comment,
+	main
 	)
 
 from news_curation.extensions import (
@@ -21,7 +22,8 @@ from news_curation.extensions import (
 	csrf
 	)
 
-from flask_admin.contrib.sqla import ModelView
+from news_curation.admin_view.utils import MyModelView
+# from flask_admin.contrib.sqla import ModelView
 
 FLASK_ENV = environ['FLASK_ENV']
 
@@ -61,6 +63,7 @@ def register_extensions(app):
 	return None
 
 def register_blueprints(app):
+	app.register_blueprint(main.bp)
 	app.register_blueprint(user.bp, url_prefix="/user")
 	app.register_blueprint(post.bp, url_prefix="/post")
 	app.register_blueprint(topic.bp, url_prefix="/topic")
@@ -75,4 +78,4 @@ def register_commands(app):
 def add_view(*args):
 	for arg in args:
 		# set model's name as url
-		admin.add_view(ModelView(arg, db.session, endpoint=arg.__name__))
+		admin.add_view(MyModelView(arg, db.session, endpoint=arg.__name__))

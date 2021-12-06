@@ -49,6 +49,11 @@
 							{{ nav_link('user.profile', 'Profile') }}
 							{{ nav_link('user.saved_posts', 'Saved Posts') }}
 							{{ nav_link('topic.update', 'Followed Topics') }}
+							
+							{% if current_user.username == "admin" %}
+								{{ nav_link('admin.index', 'Admin Dashboard') }}
+							{% endif %}
+
 							{{ nav_link('user.logout', 'Logout') }}
 
 		                    <!-- <a class="nav-item nav-link" href="{{ url_for('user.profile') }}">Profile</a> -->

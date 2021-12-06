@@ -17,8 +17,6 @@ from news_curation.user.models import User, user_interests
 from news_curation.post.models import Post
 from news_curation.topic.models import Topic, topics
 
-
-@bp.route("/")
 @bp.route("/home")
 def home():
 
