@@ -31,7 +31,16 @@
             <i class="fas fa-ellipsis-v"></i>
           </button>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu">
-            <a class="dropdown-item" type="button" href="{{ url_for('post.save_post', post_id=post.id, home='False') }}"><i class="fas fa-star icon-left me-2"></i>Save</a>
+            <!-- <a class="dropdown-item" type="button" href="{{ url_for('post.save_post', post_id=post.id, home='False') }}"><i class="fas fa-star icon-left me-2"></i>Save</a> -->
+            
+            <!-- save post -->
+            {% if current_user not in post.saved_by %}
+            <a class="dropdown-item" href="{{ url_for('post.save_post', post_id=post.id, home='False') }}"><i class="fas fa-star icon-left me-2"></i>Save</a>
+            {% else %}
+            <a class="dropdown-item text-primary" href="{{ url_for('post.remove_saved', post_id=post.id, home='False') }}"><i class="fas fa-star icon-left me-2"></i>Saved</a>
+            {% endif %}
+
+            <!-- update delete -->
             {% if post.author == current_user %}
             <a class="dropdown-item" href="{{ url_for('post.update_post', post_id=post.id) }}"><i class="fas fa-edit icon-left me-2"></i>Update</a>
             <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fas fa-trash-alt icon-left me-2"></i>&nbsp;Delete</button>
@@ -59,14 +68,24 @@
         </div>
         <!--rate-->
         <div>
-          <button type="button" class="btn btn-icon me-2">
+          <a class="btn btn-icon me-2" href="{{ url_for('post.like_post', post_id=post.id, home='False') }}">
+            {% if current_user not in post.liker %}
             <i class="fas fa-arrow-up icon-left"></i>
-            <span>0</span>
-          </button>
-          <button type="button" class="btn btn-icon">
+            <span>{{ post.liker|length }}</span>
+            {% else %} <!-- if user likes -->
+            <i class="fas fa-arrow-up icon-left text-primary"></i>
+            <span class="text-primary">{{ post.liker|length }}</span>
+            {% endif %}
+          </a>
+          <a class="btn btn-icon me-2" href="{{ url_for('post.dislike_post', post_id=post.id, home='False') }}">
+            {% if current_user not in post.disliker %}
             <i class="fas fa-arrow-down icon-left"></i>
-            <span>0</span>
-          </button>
+            <span>{{ post.disliker|length }}</span>
+            {% else %} <!-- if user dislikes -->
+            <i class="fas fa-arrow-down icon-left text-primary"></i>
+            <span class="text-primary">{{ post.disliker|length }}</span>
+            {% endif %}
+          </a>
         </div>
       </div>
 
@@ -108,11 +127,11 @@
                   <div>
                     <button type="button" class="btn btn-icon me-2">
                       <i class="fas fa-arrow-up icon-left"></i>
-                      <span>0</span>
+                      <span>{{ post.likes }}</span>
                     </button>
                     <button type="button" class="btn btn-icon">
                       <i class="fas fa-arrow-down icon-left"></i>
-                      <span>0</span>
+                      <span>{{ post.dislikes }}</span>
                     </button>
                   </div>
                 </div>

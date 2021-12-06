@@ -21,6 +21,18 @@ saves = db.Table('saves',
         db.Column('post_id', db.Integer, db.ForeignKey('post.id'))
         )
 
+    # for liked posts
+likes = db.Table('likes',
+        db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+        db.Column('post_id', db.Integer, db.ForeignKey('post.id'))
+        )
+
+    # for disliked posts
+dislikes = db.Table('dislikes',
+        db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+        db.Column('post_id', db.Integer, db.ForeignKey('post.id'))
+        )
+
 class User(db.Model, UserMixin):
         id = db.Column(db.Integer, primary_key=True)
         first_name = db.Column(db.String(20), nullable=False)
@@ -44,6 +56,12 @@ class User(db.Model, UserMixin):
         authored_posts = db.relationship('Post', backref='author', lazy=True)
 
         comments = db.relationship('Comment', backref='author', lazy=True)
+
+        liked_posts = db.relationship('Post', secondary=likes,
+                            backref=db.backref('liker'), lazy='dynamic')
+
+        disliked_posts = db.relationship('Post', secondary=dislikes,
+                            backref=db.backref('disliker'), lazy='dynamic')
 
         def __repr__(self):     #what will be printed out when we print this model
             return f"User('{self.first_name} {self.last_name}', '{self.username}', '{self.email}', '{self.profile_picture}')"

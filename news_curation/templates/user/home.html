@@ -47,9 +47,15 @@
           </div>
           <!--save-->
           <div class="ms-auto">
-            <a class="btn btn-icon" href="{{ url_for('post.save_post', post_id=post.id, home=True) }}">
+              {% if current_user not in post.saved_by %}
+              <a class="btn btn-icon" href="{{ url_for('post.save_post', post_id=post.id, home='True') }}">
               <i class="fas fa-star icon-left"></i>
               <span>Save</span>
+              {% else %}
+              <a class="btn btn-icon" href="{{ url_for('post.remove_saved', post_id=post.id, home='True') }}">
+              <i class="fas fa-star icon-left text-primary"></i>
+              <span class="text-primary">Saved</span>
+              {% endif %}
             </a>
           </div>
         </div>
@@ -75,20 +81,30 @@
               <span>0 Comments</span>
             </button>
           </div>
+      </a>
           <!--rate-->
-          <div>
-            <button type="button" class="btn btn-icon me-2">
+          <div class="ms-auto">
+            <a class="btn btn-icon me-2" href="{{ url_for('post.like_post', post_id=post.id, home='True') }}">
+              {% if current_user not in post.liker %}
               <i class="fas fa-arrow-up icon-left"></i>
-              <span>0</span>
-            </button>
-            <button type="button" class="btn btn-icon">
+              <span>{{ post.liker|length }}</span>
+              {% else %} <!-- if user likes -->
+              <i class="fas fa-arrow-up icon-left text-primary"></i>
+              <span class="text-primary">{{ post.liker|length }}</span>
+              {% endif %}
+            </a>
+            <a class="btn btn-icon me-2" href="{{ url_for('post.dislike_post', post_id=post.id, home='True') }}">
+              {% if current_user not in post.disliker %}
               <i class="fas fa-arrow-down icon-left"></i>
-              <span>0</span>
-            </button>
+              <span>{{ post.disliker|length }}</span>
+              {% else %} <!-- if user dislikes -->
+              <i class="fas fa-arrow-down icon-left text-primary"></i>
+              <span class="text-primary">{{ post.disliker|length }}</span>
+              {% endif %}
+            </a>
           </div>
         </div>
         <!--end of comment and rate-->
-      </a>
 		</article>
 	{% endfor %}
 	</div>

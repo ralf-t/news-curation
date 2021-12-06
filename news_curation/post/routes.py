@@ -178,7 +178,9 @@ def save_post(post_id):
 	    flash('Post has been saved!', 'success')
 
 	if home == 'True': #return to homepage if saved from there
-		return redirect(url_for('user.home'))
+		return redirect(url_for('user.home', _anchor=post_id))
+	elif home == 'Profile':
+		return redirect(url_for('user.profile', _anchor=post_id))
 	else:
 		return redirect(url_for('post.post', post_id=post_id))
 
@@ -187,9 +189,73 @@ def save_post(post_id):
 @bp.route("/<int:post_id>/remove_saved")
 @login_required
 def remove_saved(post_id):
+	home = request.args.get('home')
+
 	post = Post.query.get_or_404(post_id)
 	post.saved_by.remove(current_user)
 	db.session.commit()
-	flash('Post has been removed from Saved Posts', 'success')
+	flash('Post removed from Saved Posts', 'info')
 
-	return redirect(url_for('user.saved_posts'))
+	if home == 'True': #return to homepage if saved from there
+		return redirect(url_for('user.home', _anchor=post_id))
+	elif home == 'Saves':
+		return redirect(url_for('user.saved_posts'))
+	elif home == 'Profile':
+		return redirect(url_for('user.profile', _anchor=post_id))
+	else:
+		return redirect(url_for('post.post', post_id=post_id))
+
+
+#Liking post
+@bp.route("/<int:post_id>/like")
+@login_required
+def like_post(post_id):
+	home = request.args.get('home')
+
+	post = Post.query.get_or_404(post_id)
+	# post.likes += 1
+	# db.session.commit()
+
+	if current_user not in post.liker:
+		post.liker.append(current_user)
+		if current_user in post.disliker: #if current user dislikes the post, remove dislike
+			post.disliker.remove(current_user)
+	else:
+		post.liker.remove(current_user)
+	
+	db.session.commit()
+
+	if home == 'True': #return to homepage if liked from there
+		return redirect(url_for('user.home', _anchor=post_id))
+	elif home == 'Saves':
+		return redirect(url_for('user.saved_posts', _anchor=post_id))
+	elif home == 'Profile':
+		return redirect(url_for('user.profile', _anchor=post_id))
+	else:
+		return redirect(url_for('post.post', post_id=post_id))
+
+#Disliking post
+@bp.route("/<int:post_id>/dislike")
+@login_required
+def dislike_post(post_id):
+	home = request.args.get('home')
+
+	post = Post.query.get_or_404(post_id)
+
+	if current_user not in post.disliker: #if user is first time disliker, add to db
+		post.disliker.append(current_user)
+		if current_user in post.liker: #if current user likes the post, remove like
+			post.liker.remove(current_user)
+	else:
+		post.disliker.remove(current_user)
+	
+	db.session.commit()
+
+	if home == 'True': #return to homepage if disliked from there
+		return redirect(url_for('user.home', _anchor=post_id))
+	elif home == 'Saves':
+		return redirect(url_for('user.saved_posts', _anchor=post_id))
+	elif home == 'Profile':
+		return redirect(url_for('user.profile', _anchor=post_id))
+	else:
+		return redirect(url_for('post.post', post_id=post_id))

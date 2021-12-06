@@ -118,7 +118,8 @@ def save_picture(form_picture):
 @bp.route("/profile", methods=['GET', 'POST'])
 @login_required     #prevents anonymous user from going to profile page
 def profile():
-    user_posts = Post.query.filter_by(user_id=current_user.id).all()
+    # user_posts = Post.query.filter_by(user_id=current_user.id).all()
+    user_posts = Post.query.filter_by(user_id=current_user.id).order_by(desc(Post.created_at)).all() #order by latest first
     form = UpdateProfileForm()
     error = False
         
@@ -149,9 +150,10 @@ def profile():
     return render_template('user/profile.html', user_posts=user_posts, 
                             form=form, error=error, image_file=image_file)
 
-
+#View saved posts
 @bp.route("/saved_posts")
 @login_required
 def saved_posts():
-    posts = current_user.saved_posts
+    posts = current_user.saved_posts.order_by(desc(Post.created_at)).all()
+
     return render_template('user/saved_posts.html', posts=posts)
