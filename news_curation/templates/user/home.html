@@ -32,6 +32,13 @@
       </div>  
     </div>
 
+
+<!-- sort posts -->
+    <div class="media px-5 py-3 mb-4 rounded shadow-sm">
+      <a href="" class="btn btn-secondary" disabled>All Posts</a>
+      <a href="" class="btn btn-secondary" disabled>Most Popular</a>
+    </div>
+
 	{% for post in posts %}
 		<article id="{{ post.id }}" class="media content-section p-5 mb-4 rounded shadow-sm">
         <!--user image and name-->
@@ -71,9 +78,14 @@
         </div>
       <!--end of article content-->
 
+      <!------ for printing the tags of the post --------->
+      {% for topics in post.topic %}
+      <button class="btn btn-sm btn-light mb-1" disabled>{{ topics.topic }}</button>
+      {% endfor %}
+
 
         <!--comment and rate-->
-        <div class="d-flex">
+        <div class="d-flex mt-2">
           <!--comment-->
           <div class="me-auto">
             <button type="button" class="btn btn-icon">
