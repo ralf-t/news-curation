@@ -181,6 +181,8 @@ def save_post(post_id):
 		return redirect(url_for('user.home', _anchor=post_id))
 	elif home == 'Profile':
 		return redirect(url_for('user.profile', _anchor=post_id))
+	elif home == 'Popular':
+		return redirect(url_for('user.popular', _anchor=post_id))
 	else:
 		return redirect(url_for('post.post', post_id=post_id))
 
@@ -202,6 +204,8 @@ def remove_saved(post_id):
 		return redirect(url_for('user.saved_posts'))
 	elif home == 'Profile':
 		return redirect(url_for('user.profile', _anchor=post_id))
+	elif home == 'Popular':
+		return redirect(url_for('user.popular', _anchor=post_id))
 	else:
 		return redirect(url_for('post.post', post_id=post_id))
 
@@ -231,6 +235,8 @@ def like_post(post_id):
 		return redirect(url_for('user.saved_posts', _anchor=post_id))
 	elif home == 'Profile':
 		return redirect(url_for('user.profile', _anchor=post_id))
+	elif home == 'Popular':
+		return redirect(url_for('user.popular', _anchor=post_id))
 	else:
 		return redirect(url_for('post.post', post_id=post_id))
 
@@ -257,5 +263,7 @@ def dislike_post(post_id):
 		return redirect(url_for('user.saved_posts', _anchor=post_id))
 	elif home == 'Profile':
 		return redirect(url_for('user.profile', _anchor=post_id))
+	elif home == 'Popular':
+		return redirect(url_for('user.popular', _anchor=post_id))
 	else:
 		return redirect(url_for('post.post', post_id=post_id))

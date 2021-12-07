@@ -35,8 +35,13 @@
 
 <!-- sort posts -->
     <div class="media px-5 py-3 mb-4 rounded shadow-sm">
-      <a href="" class="btn btn-secondary" disabled>All Posts</a>
-      <a href="" class="btn btn-secondary" disabled>Most Popular</a>
+      {% if destination == 'True' %}
+      <a href="{{ url_for('user.home') }}" class="btn btn-primary">All Posts</a>
+      <a href="{{ url_for('user.popular') }}" class="btn btn-secondary">Most Popular</a>
+      {% else %}
+      <a href="{{ url_for('user.home') }}" class="btn btn-secondary">All Posts</a>
+      <a href="{{ url_for('user.popular') }}" class="btn btn-primary">Most Popular</a>
+      {% endif %}
     </div>
 
 	{% for post in posts %}
@@ -55,11 +60,11 @@
           <!--save-->
           <div class="ms-auto">
               {% if current_user not in post.saved_by %}
-              <a class="btn btn-icon" href="{{ url_for('post.save_post', post_id=post.id, home='True') }}">
+              <a class="btn btn-icon" href="{{ url_for('post.save_post', post_id=post.id, home=destination) }}">
               <i class="fas fa-star icon-left"></i>
               <span>Save</span>
               {% else %}
-              <a class="btn btn-icon" href="{{ url_for('post.remove_saved', post_id=post.id, home='True') }}">
+              <a class="btn btn-icon" href="{{ url_for('post.remove_saved', post_id=post.id, home=destination) }}">
               <i class="fas fa-star icon-left text-primary"></i>
               <span class="text-primary">Saved</span>
               {% endif %}
@@ -96,7 +101,7 @@
       </a>
           <!--rate-->
           <div class="ms-auto">
-            <a class="btn btn-icon me-2" href="{{ url_for('post.like_post', post_id=post.id, home='True') }}">
+            <a class="btn btn-icon me-2" href="{{ url_for('post.like_post', post_id=post.id, home=destination) }}">
               {% if current_user not in post.liker %}
               <i class="fas fa-arrow-up icon-left"></i>
               <span>{{ post.liker|length }}</span>
@@ -105,7 +110,7 @@
               <span class="text-primary">{{ post.liker|length }}</span>
               {% endif %}
             </a>
-            <a class="btn btn-icon me-2" href="{{ url_for('post.dislike_post', post_id=post.id, home='True') }}">
+            <a class="btn btn-icon me-2" href="{{ url_for('post.dislike_post', post_id=post.id, home=destination) }}">
               {% if current_user not in post.disliker %}
               <i class="fas fa-arrow-down icon-left"></i>
               <span>{{ post.disliker|length }}</span>

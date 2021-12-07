@@ -6,13 +6,13 @@ from PIL import Image  #from Pillow package
 
 from flask import render_template, url_for, flash, redirect, request, current_app
 from flask_login import current_user, login_user, logout_user, login_required
-from sqlalchemy import desc
+from sqlalchemy import desc, func
 
 from news_curation.extensions import bcrypt, db
 
 from news_curation.user import bp
 from news_curation.user.forms import LoginForm, RegistrationForm, UpdateProfileForm
-from news_curation.user.models import User, user_interests
+from news_curation.user.models import User, user_interests, likes
 
 from news_curation.post.models import Post
 from news_curation.topic.models import Topic, topics
@@ -38,7 +38,14 @@ def home():
     else:
         posts = Post.query.order_by(desc(Post.created_at)).all()
     
-    return render_template('user/home.html', posts=posts)
+    return render_template('user/home.html', posts=posts, destination='True')
+
+# sort by most popular
+@bp.route("/popular")
+def popular():
+    posts = Post.query.join(likes, Post.id == likes.c.post_id).group_by(Post.id).order_by(desc(func.count(likes.c.user_id))).all()
+    return render_template('user/home.html', posts=posts, destination='Popular')
+
 
 @bp.route("/register", methods=['GET', 'POST'])
 def register():
