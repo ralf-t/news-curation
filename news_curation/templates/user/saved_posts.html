@@ -46,6 +46,11 @@
         </div>
       <!--end of article content-->
 
+      <!------ for printing the tags of the post --------->
+      {% for topics in post.topic %}
+      <button class="btn btn-sm btn-light mb-1" disabled>{{ topics.topic }}</button>
+      {% endfor %}
+
 
         <!--comment and rate-->
         <div class="d-flex">
