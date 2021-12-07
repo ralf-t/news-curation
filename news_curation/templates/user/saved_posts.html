@@ -13,74 +13,79 @@
 {% block content %}
 	<div class="content-container mx-auto p-5 shadow-sm">
 
-	{% for post in posts %}
-		<article id="{{ post.id }}" class="media content-section p-5 mb-4 rounded shadow-sm">
-        <!--user image and name-->
-        <div class="d-flex align-items-center">
-          <!--image-->
-          <div class="me-2">
-            <img class="post-profile align-self-start mr-3 rounded-circle shadow-sm" src="{{ url_for('static', filename='profile_pics/' + post.author.profile_picture) }}" alt="Generic placeholder image">
+  {% if not posts %}
+    <br>
+    <p>You have not saved any posts. Visit your feed and save some!</p>
+  {% else %}
+  	{% for post in posts %}
+  		<article id="{{ post.id }}" class="media content-section p-5 mb-4 rounded shadow-sm">
+          <!--user image and name-->
+          <div class="d-flex align-items-center">
+            <!--image-->
+            <div class="me-2">
+              <img class="post-profile align-self-start mr-3 rounded-circle shadow-sm" src="{{ url_for('static', filename='profile_pics/' + post.author.profile_picture) }}" alt="Generic placeholder image">
+            </div>
+            <!--name and date-->
+            <div>
+              <h3 class="mt-0">{{ post.author.username }}</h3>
+              <small>{{ post.created_at.strftime("%Y-%m-%d %H:%M") }}</small>
+            </div>
+            <!--save-->
+            <div class="ms-auto">
+              <a class="btn btn-icon" href="{{ url_for('post.remove_saved', post_id=post.id, home='Saves') }}">
+                <i class="fas fa-times icon-left"></i>
+                <span>Remove</span>
+              </a>
+            </div>
           </div>
-          <!--name and date-->
-          <div>
-            <h3 class="mt-0">{{ post.author.username }}</h3>
-            <small>{{ post.created_at.strftime("%Y-%m-%d %H:%M") }}</small>
-          </div>
-          <!--save-->
-          <div class="ms-auto">
-            <a class="btn btn-icon" href="{{ url_for('post.remove_saved', post_id=post.id, home='Saves') }}">
-              <i class="fas fa-times icon-left"></i>
-              <span>Remove</span>
-            </a>
-          </div>
-        </div>
-        <!--end of user image and name-->
+          <!--end of user image and name-->
 
-      <a href="{{ url_for('post.post', post_id=post.id) }}">
-      <!--article content-->        
-        <div class="media-body mt-3"> 
-          <!--title-->
-          <h5>{{ post.title }}</h5>
-          <!--content-->
-          <p>{{ post.content }}</p>
-        </div>
-      <!--end of article content-->
-
-
-        <!--comment and rate-->
-        <div class="d-flex">
-          <!--comment-->
-          <div class="me-auto">
-            <button type="button" class="btn btn-icon">
-              <i class="fas fa-ellipsis-h icon-left"></i>
-              <span>0 Comments</span>
-            </button>
+        <a href="{{ url_for('post.post', post_id=post.id) }}">
+        <!--article content-->        
+          <div class="media-body mt-3"> 
+            <!--title-->
+            <h5>{{ post.title }}</h5>
+            <!--content-->
+            <p>{{ post.content }}</p>
           </div>
-          <!--rate-->
-          <div class="ms-auto">
-            <a class="btn btn-icon me-2" href="{{ url_for('post.like_post', post_id=post.id, home='Saves') }}">
-            {% if current_user not in post.liker %}
-            <i class="fas fa-arrow-up icon-left"></i>
-            <span>{{ post.liker|length }}</span>
-            {% else %} <!-- if user likes -->
-            <i class="fas fa-arrow-up icon-left text-primary"></i>
-            <span class="text-primary">{{ post.liker|length }}</span>
-            {% endif %}
-            </a>
-            <a class="btn btn-icon me-2" href="{{ url_for('post.dislike_post', post_id=post.id, home='Saves') }}">
-              {% if current_user not in post.disliker %}
-              <i class="fas fa-arrow-down icon-left"></i>
-              <span>{{ post.disliker|length }}</span>
-              {% else %} <!-- if user dislikes -->
-              <i class="fas fa-arrow-down icon-left text-primary"></i>
-              <span class="text-primary">{{ post.disliker|length }}</span>
+        <!--end of article content-->
+
+
+          <!--comment and rate-->
+          <div class="d-flex">
+            <!--comment-->
+            <div class="me-auto">
+              <button type="button" class="btn btn-icon">
+                <i class="fas fa-ellipsis-h icon-left"></i>
+                <span>0 Comments</span>
+              </button>
+            </div>
+            <!--rate-->
+            <div class="ms-auto">
+              <a class="btn btn-icon me-2" href="{{ url_for('post.like_post', post_id=post.id, home='Saves') }}">
+              {% if current_user not in post.liker %}
+              <i class="fas fa-arrow-up icon-left"></i>
+              <span>{{ post.liker|length }}</span>
+              {% else %} <!-- if user likes -->
+              <i class="fas fa-arrow-up icon-left text-primary"></i>
+              <span class="text-primary">{{ post.liker|length }}</span>
               {% endif %}
-            </a>
+              </a>
+              <a class="btn btn-icon me-2" href="{{ url_for('post.dislike_post', post_id=post.id, home='Saves') }}">
+                {% if current_user not in post.disliker %}
+                <i class="fas fa-arrow-down icon-left"></i>
+                <span>{{ post.disliker|length }}</span>
+                {% else %} <!-- if user dislikes -->
+                <i class="fas fa-arrow-down icon-left text-primary"></i>
+                <span class="text-primary">{{ post.disliker|length }}</span>
+                {% endif %}
+              </a>
+            </div>
           </div>
-        </div>
-        <!--end of comment and rate-->
-      </a>
-		</article>
-	{% endfor %}
+          <!--end of comment and rate-->
+        </a>
+  		</article>
+  	{% endfor %}
+  {% endif %}
 	</div>
 {% endblock %}
