@@ -18,7 +18,7 @@
       <small>{{ current_user.email }}</small>
       <div class="row mt-3">
         <div class="col"><p><strong class="highlight">{{ user_posts|length }}&nbsp;</strong>{{ 'Posts' if user_posts|length>1 else 'Post' }}</p></div>
-        <div class="col"><p><strong class="highlight">46&nbsp;</strong>Comments</p></div>
+        <div class="col"><p><strong class="highlight">{{ current_user.comments|length if current_user.comments else '0'}}&nbsp;</strong>Comments</p></div>
       </div>
       <div class="d-flex">
         <button type="button" name="button" class="btn btn-grad" data-bs-toggle="modal" data-bs-target="#profileModal">Update Profile</button>
@@ -211,7 +211,7 @@
 
       <a href="{{ url_for('post.post', post_id=post.id) }}">
       <!--article content-->        
-      <div class="media-body mt-3"> 
+      <div class="media-body mt-3 text-break"> 
         <!--title-->
         <h5>{{ post.title }}</h5>
         <!--content-->
