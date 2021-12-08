@@ -85,15 +85,6 @@
               <span class="text-primary">{{ post.disliker|length }}</span>
               {% endif %}
               </a>
-              <a class="btn btn-icon me-2" href="{{ url_for('post.dislike_post', post_id=post.id, home='Saves') }}">
-                {% if current_user not in post.disliker %}
-                <i class="fas fa-arrow-down icon-left"></i>
-                <span>{{ post.disliker|length }}</span>
-                {% else %} <!-- if user dislikes -->
-                <i class="fas fa-arrow-down icon-left text-primary"></i>
-                <span class="text-primary">{{ post.disliker|length }}</span>
-                {% endif %}
-              </a>
             </div>
           </div>
           <!--end of comment and rate-->
