@@ -233,7 +233,7 @@
         <div class="me-auto">
           <a class="btn btn-icon" href="{{ url_for('post.post', post_id=post.id) }}">
             <i class="fas fa-ellipsis-h icon-left"></i>
-            <span>0 Comments</span>
+            <span>{{ post.comments|length if post.comments else '0'}} Comments</span>
           </a>
         </div>
         <!--rate-->

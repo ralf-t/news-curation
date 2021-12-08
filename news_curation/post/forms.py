@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, SelectField
 from wtforms.validators import DataRequired, ValidationError
-# from news_curation.classifier.utils import predict
+from news_curation.classifier.utils import predict
 
 class PostForm(FlaskForm):
 	title = StringField('Title', 
@@ -17,6 +17,6 @@ class PostForm(FlaskForm):
 
 	# validate content using model
 
-	# def validate_content(self, content):
-	# 	if predict(content.data):
-	# 		raise ValidationError("Content is detected as fake.")
+	def validate_content(self, content):
+		if predict(content.data):
+			raise ValidationError("Content is detected as fake.")

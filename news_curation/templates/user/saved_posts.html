@@ -58,7 +58,7 @@
           <div class="me-auto">
             <button type="button" class="btn btn-icon">
               <i class="fas fa-ellipsis-h icon-left"></i>
-              <span>0 Comments</span>
+              <span>{{ post.comments|length if post.comments else '0'}} Comments</span>
             </button>
           </div>
           <!--rate-->
