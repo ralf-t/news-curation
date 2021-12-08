@@ -43,7 +43,7 @@ def home():
 # sort by most popular
 @bp.route("/popular")
 def popular():
-    posts = Post.query.join(likes, Post.id == likes.c.post_id).group_by(Post.id).order_by(desc(func.count(likes.c.user_id))).all()
+    posts = Post.query.outerjoin(likes, Post.id == likes.c.post_id).group_by(Post.id).order_by(desc(func.count(likes.c.user_id))).all()
     return render_template('user/home.html', posts=posts, destination='Popular')
 
 
